@@ -1,17 +1,11 @@
-# ONE HIT — corrección de recursos e identidad
+# ONEHIT — ajuste de titular V2
 
-## Correcciones
-- El logotipo grande 1HIT ahora es el PNG proporcionado, con fondo transparente; ya no se compone con texto HTML ni una estrella SVG aproximada.
-- Se corrigieron las rutas de las cinco fotografías de modelos y de las miniaturas del catálogo: se sirven desde `/public/models/`.
-- Se incluyó el PNG del logotipo en `public/brand/onehit-logo.png`.
+Cambios de esta versión:
+- El titular «CÓMO QUIERES / VERTE HOY» queda en primer plano por encima del modelo.
+- Se centra verticalmente en la composición, siguiendo la referencia compartida.
+- Se conserva el modelo, logo PNG, carrusel, flechas, indicadores y resto de la tienda.
+- Se elimina un salto de línea literal que podía aparecer como texto suelto en la parte superior.
 
-## Subida a GitHub / Cloudflare Pages
-1. Descomprime el ZIP.
-2. Sube el contenido completo a la raíz del repositorio `welive1hit`, reemplazando archivos anteriores.
-3. Confirma el commit y espera el despliegue de Cloudflare Pages.
-4. Haz una recarga forzada del navegador si conserva recursos antiguos.
+Subir todos los archivos del ZIP a la raíz del repositorio `welive1hit`, reemplazando los anteriores. Cloudflare Pages debe publicar desde la raíz (sin comando de build).
 
-Configuración de Pages: preset None, comando de build vacío y directorio de salida `/` (raíz del repositorio).
-
-## Nota
-El carrito continúa siendo una demostración local; Mercado Pago, registro de pedidos e inventario aún no están conectados.
+No se modificaron las fotografías ni el comportamiento de la animación.
