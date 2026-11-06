@@ -2,42 +2,39 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#fff"><title>ONE HIT® — WE LIVE 1HIT.</title>
+<meta name="theme-color" content="#fff">
+<title>ONEHIT® — WE LIVE 1HIT.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
 <header class="header">
-  <a class="logo" href="#home">ONE<span>HIT</span><sup>®</sup></a>
-  <nav><a href="#shop">TIENDA</a><a href="#shop">COLECCIONES</a><a href="#about">NOSOTROS</a></nav>
-  <button id="cart-open" class="cart-open">BOLSA <i id="count">0</i> ↗</button>
+ <a class="logo" href="#home">ONE<span>HIT</span><sup>®</sup></a>
+ <nav><a href="#shop">TIENDA</a><a href="#shop">COLECCIONES</a><a href="#about">NOSOTROS</a></nav>
+ <button class="bag" id="bag">BOLSA <span id="bag-count">0</span> ↗</button>
 </header>
 <main>
 <section class="hero" id="home">
-  <div class="fixed-copy">
-    <p class="micro top-left">DROP 001 <b>—</b> PERÚ</p>
-    <p class="micro top-right">ROPA PARA QUIENES<br>VIVEN A SU MANERA.</p>
-    <div class="type-back">WE LIVE</div>
-    <div class="type-front">1HIT<span>®</span></div>
-    <div class="left-info"><span id="number">01 / 05</span><b id="product-name">POLO BÁSICO / NEGRO</b><small id="product-price">S/ 45.00</small></div>
-    <div class="right-info">WE LIVE 1HIT.<small>STREETWEAR / PERÚ</small></div>
-    <div class="controls"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
-    <button class="buy" id="buy">COMPRAR AHORA <span>↗</span></button>
-    <div class="progress" id="progress"><button class="on" aria-label="Modelo 1"></button><button aria-label="Modelo 2"></button><button aria-label="Modelo 3"></button><button aria-label="Modelo 4"></button><button aria-label="Modelo 5"></button></div>
-  </div>
-  <div class="model-window"><div class="model-track" id="track">
-    <div class="model model-1"><div class="silhouette"><span>ONE HIT®</span></div><small>01 / BLACK ESSENTIAL</small></div>
-    <div class="model model-2"><div class="silhouette"><span>ONE HIT®</span></div><small>02 / WHITE ESSENTIAL</small></div>
-    <div class="model model-3"><div class="silhouette"><span>1HIT.</span></div><small>03 / GRAPHIC DROP</small></div>
-    <div class="model model-4"><div class="silhouette"><span>ONE HIT®</span></div><small>04 / NEUTRAL DROP</small></div>
-    <div class="model model-5"><div class="silhouette"><span>ONE HIT®</span></div><small>05 / HOODIE</small></div>
-  </div></div>
+ <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 2 61 34 96 37 69 59 78 94 50 75 22 94 31 59 4 37 39 34Z"/><path d="M53 29c-9 10 7 13 2 22-4 7-13 5-11 15 1 6 8 9 8 17 9-7 15-17 10-27-4-7-14-9-9-18 2-4 4-6 0-9Z" class="cut"/></svg></div>
+ <div class="giant-brand" aria-hidden="true">1HIT</div>
+ <div class="headline"><span>CÓMO QUIERES</span><strong>VERTE HOY</strong></div>
+ <div class="model-window"><div class="model-track" id="model-track">
+   <div class="model-slide"><img src="/models/model-white.webp" alt="Modelo con polo gráfico blanco"></div>
+   <div class="model-slide black-look"><img src="/models/model-black.webp" alt="Modelo con polo negro"></div>
+   <div class="model-slide alt-look"><img src="/models/model-alt.webp" alt="Modelo con polo gráfico"></div>
+   <div class="model-slide graphic-look"><img src="/models/model-graphic.webp" alt="Modelo con polo de colección"></div>
+   <div class="model-slide hoodie-look"><img src="/models/model-hoodie.webp" alt="Modelo con hoodie"></div>
+ </div></div>
+ <div class="arrows"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
+ <div class="product-meta"><small id="slide-number">01 / 05</small><b id="product-name">POLO GRÁFICO 01 / BLANCO</b><span id="product-price">S/ 49.00</span></div>
+ <button class="buy" id="buy">COMPRAR AHORA <span>↗</span></button>
+ <div class="slogan">WE LIVE 1HIT.<small>STREETWEAR / PERÚ</small></div>
+ <div class="indicators" id="indicators"><button class="active"></button><button></button><button></button><button></button><button></button></div>
 </section>
-<section class="shop" id="shop"><div class="shop-head"><div><p class="micro">SELECCIÓN 001</p><h2>ELIGE TU<br><span>1HIT.</span></h2></div><p>PIEZAS PARA TODOS LOS DÍAS.<br>HECHAS PARA DEJAR HUELLA.</p></div><div class="grid" id="grid"></div></section>
-<section class="about" id="about"><p class="micro">NO ES SOLO LO QUE VISTES.</p><h2>WE LIVE<br><span>1HIT.</span></h2><p>Una forma de vivir. Una forma de expresarte.<br>Un momento puede definirlo todo.</p></section>
+<section class="shop" id="shop"><div class="shop-title"><p>DROP 001 — PERÚ</p><h2>ELIGE TU<br><span>1HIT.</span></h2></div><div class="shop-grid" id="shop-grid"></div></section>
+<section class="about" id="about"><p>NO ES SOLO LO QUE VISTES.</p><h2>WE LIVE<br>1HIT.</h2><span>Una forma de vivir. Una forma de expresarte.</span></section>
 </main>
-<footer><a class="logo" href="#home">ONE<span>HIT</span><sup>®</sup></a><span>WE LIVE 1HIT.</span><span>© ONE HIT 2026</span></footer>
-<div class="shade" id="shade"></div><aside class="drawer" id="drawer"><div class="drawer-head"><b>TU BOLSA</b><button id="cart-close">×</button></div><div id="items" class="items"><p>Tu bolsa está vacía.</p></div><div class="drawer-foot"><b>SUBTOTAL <span id="total">S/ 0.00</span></b><button id="checkout" disabled>CONTINUAR ↗</button><small>Checkout de demostración. Mercado Pago aún no está conectado.</small></div></aside>
+<div class="drawer-backdrop" id="backdrop"></div><aside class="drawer" id="drawer"><div class="drawer-head"><b>TU BOLSA</b><button id="close">×</button></div><div id="cart-items" class="cart-items">Tu bolsa está vacía.</div><div class="drawer-foot"><b>SUBTOTAL <span id="subtotal">S/ 0.00</span></b><button id="checkout" disabled>CONTINUAR ↗</button><small>Checkout de demostración. Mercado Pago aún no está conectado.</small></div></aside>
 <script src="/src/app.js"></script>
 </body></html>

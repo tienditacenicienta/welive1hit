@@ -1,19 +1,20 @@
-# ONE HIT — Home visual v3
+# ONE HIT — referencia visual
 
-## Composición corregida
-- Fondo blanco fijo.
-- `1HIT.` detrás del modelo.
-- Modelo en la capa intermedia.
-- `WE LIVE` delante del modelo.
-- Las capas tipográficas permanecen fijas durante el cambio de prenda.
-- El carrusel ocupa todo el ancho de la portada: cada modelo entra desde un extremo y el anterior sale por completo por el extremo contrario.
-- Se retiró el recorte poligonal (`clip-path`) de la silueta de la prenda.
+Esta versión toma como base el visual proporcionado:
+- Header minimalista: ONEHIT®, TIENDA, COLECCIONES, NOSOTROS y BOLSA.
+- Titular izquierdo: CÓMO QUIERES VERTE HOY.
+- Modelo central con polo gráfico blanco.
+- Marca 1HIT gigante detrás del modelo y estrella superior.
+- Controles laterales, ficha de producto, botón comprar y cinco indicadores.
+- Carrusel de 5 posiciones con desplazamiento horizontal de pantalla completa.
+- Carrito demostrativo local.
 
-## Publicación
-Sube el contenido de este ZIP a la raíz del repositorio GitHub `welive1hit`.
-Cloudflare Pages: Framework preset `None`, build command vacío y output directory `/` o `.`.
+## Subir a GitHub / Cloudflare
+Sube el contenido del ZIP a la raíz de `welive1hit`.
+Cloudflare Pages: Framework preset None, build command vacío, output directory `/` o `.`.
 
-## Estado funcional
-El carrusel y el carrito local son demostrativos. Todavía no se procesan pagos, no se registran pedidos en servidor y no se descuenta inventario.
-Las siluetas CSS son placeholders provisionales; para la versión final se reemplazarán por fotografías individuales generadas de modelos con prendas ONE HIT.
-Las referencias de arte IA están en `public/ai-references/`.
+## Imágenes
+El modelo principal se generó con IA y se integró como WebP transparente en `public/models/`. Los otros cuatro estados son variaciones visuales provisionales del mismo modelo, pendientes de sustituir por fotografías independientes de cada prenda.
+
+## Importante
+El carrito es solo demostrativo. No procesa pagos, no crea pedidos persistentes ni descuenta inventario. Mercado Pago y el backend se integrarán después.

@@ -1,17 +1,11 @@
-const items=[
-{name:'Polo básico',variant:'Negro',price:45},
-{name:'Polo básico',variant:'Blanco',price:45},
-{name:'Polo gráfico 01',variant:'Drop 001',price:49},
-{name:'Polo gráfico 02',variant:'Arena',price:49},
-{name:'Hoodie ONE HIT',variant:'Negro',price:89}
-];let active=0,cart=[],timer;const $=s=>document.querySelector(s);
-function slide(n){active=(n+items.length)%items.length;$('#track').style.transform=`translateX(-${active*100}%)`;$('#number').textContent=`${String(active+1).padStart(2,'0')} / 05`;$('#product-name').textContent=`${items[active].name} / ${items[active].variant}`.toUpperCase();$('#product-price').textContent=`S/ ${items[active].price.toFixed(2)}`;document.querySelectorAll('.progress button').forEach((b,i)=>b.classList.toggle('on',i===active));restart()}
-function restart(){clearInterval(timer);timer=setInterval(()=>slide(active+1),5500)}
-$('#prev').onclick=()=>slide(active-1);$('#next').onclick=()=>slide(active+1);document.querySelectorAll('.progress button').forEach((b,i)=>b.onclick=()=>slide(i));
-function openCart(){$('#drawer').classList.add('active');$('#shade').classList.add('active')}function closeCart(){$('#drawer').classList.remove('active');$('#shade').classList.remove('active')}
-$('#cart-open').onclick=openCart;$('#cart-close').onclick=closeCart;$('#shade').onclick=closeCart;
-function render(){ $('#count').textContent=cart.length;$('#total').textContent=`S/ ${cart.reduce((s,p)=>s+p.price,0).toFixed(2)}`;$('#checkout').disabled=!cart.length;$('#items').innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><span>${p.name} · ${p.variant}<br><small>Talla ${p.size}</small></span><span>S/ ${p.price.toFixed(2)} <button data-del="${i}">×</button></span></div>`).join(''):'<p>Tu bolsa está vacía.</p>';document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.del,1);render()})}
-function addCurrent(){const p=items[active];const size=prompt('Selecciona talla: S, M, L o XL','M');if(!size)return;if(!['S','M','L','XL'].includes(size.toUpperCase())){alert('Talla no válida');return}cart.push({...p,size:size.toUpperCase()});render();openCart()}
-$('#buy').onclick=addCurrent;$('#checkout').onclick=()=>alert('Checkout de demostración. Mercado Pago todavía no está conectado.');
-$('#grid').innerHTML=items.map((p,i)=>`<article class="card" data-i="${i}"><div class="card-art"><div class="mini-shirt">1HIT.</div></div><div class="card-meta"><b>${p.name} · ${p.variant}</b><b>S/ ${p.price}</b></div></article>`).join('');document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{slide(+c.dataset.i);window.scrollTo({top:0,behavior:'smooth'})});
-slide(0);render();
+const products=[{name:"Polo gráfico 01 / Blanco",price:49},{name:"Polo básico / Negro",price:45},{name:"Polo gráfico 02 / Blanco",price:49},{name:"Polo gráfico 02 / Arena",price:49},{name:"Hoodie ONE HIT / Negro",price:89}];let current=0,cart=[],timer;const $=s=>document.querySelector(s);
+function show(i){current=(i+products.length)%products.length;$("#model-track").style.transform=`translateX(-${current*20}%)`;$("#slide-number").textContent=`${String(current+1).padStart(2,"0")} / 05`;$("#product-name").textContent=products[current].name.toUpperCase();$("#product-price").textContent=`S/ ${products[current].price.toFixed(2)}`;document.querySelectorAll("#indicators button").forEach((b,n)=>b.classList.toggle("active",n===current));restart()}
+function restart(){clearInterval(timer);timer=setInterval(()=>show(current+1),5500)}
+$("#prev").onclick=()=>show(current-1);$("#next").onclick=()=>show(current+1);document.querySelectorAll("#indicators button").forEach((b,i)=>b.onclick=()=>show(i));
+function open(){ $("#drawer").classList.add("open");$("#backdrop").classList.add("open")}function close(){ $("#drawer").classList.remove("open");$("#backdrop").classList.remove("open")}
+$("#bag").onclick=open;$("#close").onclick=close;$("#backdrop").onclick=close;
+function render(){ $("#bag-count").textContent=cart.length;$("#subtotal").textContent=`S/ ${cart.reduce((a,p)=>a+p.price,0).toFixed(2)}`;$("#checkout").disabled=!cart.length;$("#cart-items").innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><span>${p.name}<br><small>Talla ${p.size}</small></span><b>S/ ${p.price.toFixed(2)} <button data-remove="${i}">×</button></b></div>`).join(""):"Tu bolsa está vacía.";document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.remove,1);render()})}
+$("#buy").onclick=()=>{const size=prompt("Selecciona talla: S, M, L o XL","M");if(!size)return;if(!["S","M","L","XL"].includes(size.toUpperCase())){alert("Talla no válida");return}cart.push({...products[current],size:size.toUpperCase()});render();open()};
+$("#checkout").onclick=()=>alert("Checkout de demostración. Mercado Pago aún no está conectado.");
+$("#shop-grid").innerHTML=products.map((p,i)=>`<article class="shop-card"><img src="/models/model-white.webp" alt=""><p>${p.name.toUpperCase()} · S/ ${p.price}</p></article>`).join("");
+show(0);render();
