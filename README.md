@@ -1,16 +1,19 @@
-# ONE HIT — Home visual + AI concept pack
+# ONE HIT — Home visual v3
 
-Incluye:
-- Portada editorial blanca/negra con WE LIVE detrás y 1HIT delante.
-- Carrusel automático de cinco looks ilustrativos (figuras vectoriales de prendas) con slide horizontal.
-- Flechas y navegación por indicadores.
-- Catálogo demostrativo y carrito local.
-- Cinco referencias visuales generadas por IA en `public/ai-references/`.
+## Composición corregida
+- Fondo blanco fijo.
+- `1HIT.` detrás del modelo.
+- Modelo en la capa intermedia.
+- `WE LIVE` delante del modelo.
+- Las capas tipográficas permanecen fijas durante el cambio de prenda.
+- El carrusel ocupa todo el ancho de la portada: cada modelo entra desde un extremo y el anterior sale por completo por el extremo contrario.
+- Se retiró el recorte poligonal (`clip-path`) de la silueta de la prenda.
 
-## Publicación en Cloudflare Pages
+## Publicación
 Sube el contenido de este ZIP a la raíz del repositorio GitHub `welive1hit`.
-Configuración Pages: Framework preset `None`; build command vacío; output directory `/` o `.`.
+Cloudflare Pages: Framework preset `None`, build command vacío y output directory `/` o `.`.
 
-## Importante
-Las imágenes generadas de referencia están en `public/ai-references/`; son propuestas visuales completas, no recortes transparentes de modelos utilizables como fotografía de producto. El carrusel de esta entrega usa ilustraciones vectoriales provisionales para que el diseño funcione y mantenga las capas tipográficas fijas. En la siguiente iteración se sustituyen por cinco retratos de modelos generados individualmente y recortados para integrarse detrás/delante del texto.
-El carrito es demostrativo. No procesa pagos, no guarda pedidos en servidor y no descuenta inventario. No usar para cobrar.
+## Estado funcional
+El carrusel y el carrito local son demostrativos. Todavía no se procesan pagos, no se registran pedidos en servidor y no se descuenta inventario.
+Las siluetas CSS son placeholders provisionales; para la versión final se reemplazarán por fotografías individuales generadas de modelos con prendas ONE HIT.
+Las referencias de arte IA están en `public/ai-references/`.
