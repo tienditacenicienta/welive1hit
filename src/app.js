@@ -7,5 +7,5 @@ $("#bag").onclick=open;$("#close").onclick=close;$("#backdrop").onclick=close;
 function render(){ $("#bag-count").textContent=cart.length;$("#subtotal").textContent=`S/ ${cart.reduce((a,p)=>a+p.price,0).toFixed(2)}`;$("#checkout").disabled=!cart.length;$("#cart-items").innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><span>${p.name}<br><small>Talla ${p.size}</small></span><b>S/ ${p.price.toFixed(2)} <button data-remove="${i}">×</button></b></div>`).join(""):"Tu bolsa está vacía.";document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.remove,1);render()})}
 $("#buy").onclick=()=>{const size=prompt("Selecciona talla: S, M, L o XL","M");if(!size)return;if(!["S","M","L","XL"].includes(size.toUpperCase())){alert("Talla no válida");return}cart.push({...products[current],size:size.toUpperCase()});render();open()};
 $("#checkout").onclick=()=>alert("Checkout de demostración. Mercado Pago aún no está conectado.");
-$("#shop-grid").innerHTML=products.map((p,i)=>`<article class="shop-card"><img src="/models/model-white.webp" alt=""><p>${p.name.toUpperCase()} · S/ ${p.price}</p></article>`).join("");
+$("#shop-grid").innerHTML=products.map((p,i)=>`<article class="shop-card"><img src="/public/models/model-white.webp" alt=""><p>${p.name.toUpperCase()} · S/ ${p.price}</p></article>`).join("");
 show(0);render();

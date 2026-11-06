@@ -1,20 +1,17 @@
-# ONE HIT — referencia visual
+# ONE HIT — corrección de recursos e identidad
 
-Esta versión toma como base el visual proporcionado:
-- Header minimalista: ONEHIT®, TIENDA, COLECCIONES, NOSOTROS y BOLSA.
-- Titular izquierdo: CÓMO QUIERES VERTE HOY.
-- Modelo central con polo gráfico blanco.
-- Marca 1HIT gigante detrás del modelo y estrella superior.
-- Controles laterales, ficha de producto, botón comprar y cinco indicadores.
-- Carrusel de 5 posiciones con desplazamiento horizontal de pantalla completa.
-- Carrito demostrativo local.
+## Correcciones
+- El logotipo grande 1HIT ahora es el PNG proporcionado, con fondo transparente; ya no se compone con texto HTML ni una estrella SVG aproximada.
+- Se corrigieron las rutas de las cinco fotografías de modelos y de las miniaturas del catálogo: se sirven desde `/public/models/`.
+- Se incluyó el PNG del logotipo en `public/brand/onehit-logo.png`.
 
-## Subir a GitHub / Cloudflare
-Sube el contenido del ZIP a la raíz de `welive1hit`.
-Cloudflare Pages: Framework preset None, build command vacío, output directory `/` o `.`.
+## Subida a GitHub / Cloudflare Pages
+1. Descomprime el ZIP.
+2. Sube el contenido completo a la raíz del repositorio `welive1hit`, reemplazando archivos anteriores.
+3. Confirma el commit y espera el despliegue de Cloudflare Pages.
+4. Haz una recarga forzada del navegador si conserva recursos antiguos.
 
-## Imágenes
-El modelo principal se generó con IA y se integró como WebP transparente en `public/models/`. Los otros cuatro estados son variaciones visuales provisionales del mismo modelo, pendientes de sustituir por fotografías independientes de cada prenda.
+Configuración de Pages: preset None, comando de build vacío y directorio de salida `/` (raíz del repositorio).
 
-## Importante
-El carrito es solo demostrativo. No procesa pagos, no crea pedidos persistentes ni descuenta inventario. Mercado Pago y el backend se integrarán después.
+## Nota
+El carrito continúa siendo una demostración local; Mercado Pago, registro de pedidos e inventario aún no están conectados.
