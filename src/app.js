@@ -29,8 +29,6 @@ $("#bag").onclick=open;$("#close").onclick=close;$("#backdrop").onclick=close;
 function updateSelection(){
  document.querySelectorAll("#size-options button").forEach(b=>b.classList.toggle("selected",b.dataset.size===selectedSize));
  $("#quantity").textContent=quantity;
- $("#selection-hint").textContent=selectedSize?"": "Selecciona una talla";
- $("#selection-hint").classList.toggle("visible",!selectedSize);
 }
 document.querySelectorAll("#size-options button").forEach(b=>{
  b.addEventListener("click",()=>{
@@ -59,11 +57,9 @@ function render(){
 }
 $("#buy").onclick=()=>{
  if(!selectedSize){
-  $("#selection-hint").classList.add("visible");
-  $("#size-options").classList.add("needs-size");
+  return;
   return;
  }
- $("#size-options").classList.remove("needs-size");
  const p=products[current];
  const existing=cart.find(item=>item.name===p.name&&item.size===selectedSize);
  if(existing) existing.quantity+=quantity;

@@ -40,3 +40,40 @@
  .selection-hint{position:absolute;left:0;top:calc(100% + 4px);white-space:nowrap;font-size:8px}
  .buy{left:5%;bottom:4.5%;min-width:220px;padding:13px 15px;font-size:8px;gap:12px}
 }
+
+/* ONE HIT refinement 02 — centered headline and clean purchase stack */
+#home{position:relative}
+#home .headline{
+ top:50% !important;
+ left:4.5% !important;
+ bottom:auto !important;
+ transform:translateY(-50%) !important;
+ z-index:15 !important;
+}
+#home .product-meta{bottom:22% !important}
+#home .purchase-options{
+ bottom:15% !important;
+ left:4.8% !important;
+ gap:24px !important;
+ align-items:flex-end !important;
+}
+#home .buy{
+ bottom:4.5% !important;
+ min-height:54px !important;
+}
+#home .selection-hint{display:none !important}
+@media(max-width:700px){
+ #home .headline{
+  top:50% !important;
+  left:5% !important;
+  bottom:auto !important;
+  transform:translateY(-50%) !important;
+ }
+ #home .product-meta{bottom:24% !important}
+ #home .purchase-options{
+  bottom:15% !important;
+  left:5% !important;
+  gap:16px !important;
+ }
+ #home .buy{bottom:4.5% !important;min-height:46px !important}
+}

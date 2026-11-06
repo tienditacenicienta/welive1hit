@@ -1,17 +1,10 @@
-# ONE HIT — selector de talla y cantidad
+# ONE HIT — refinamiento de portada y compra
 
-Actualización de la portada:
-- Elimina el popup `prompt()` para elegir talla.
-- Muestra tallas S, M, L y XL encima del botón.
-- Añade control de cantidad − / +.
-- El botón AÑADIR A LA BOLSA agrega el producto, talla y cantidad al carrito.
-- Si no se selecciona talla, muestra un aviso discreto en la misma zona, sin popup.
-- El contador de la bolsa suma unidades y el subtotal calcula precio × cantidad.
-- Si se añade nuevamente el mismo producto y talla, acumula la cantidad.
+Cambios:
+- Titular centrado verticalmente respecto al hero (`top: 50%` del contenedor), con alineación izquierda y delante del modelo.
+- Menor separación entre nombre/precio y selector de talla/cantidad.
+- Selector elevado para que no se superponga al botón de añadir.
+- Eliminado el texto rojo de validación. Si no se elige talla, no añade el producto; no aparece popup.
+- Se conserva el carrusel, imágenes, carrito y demás estilos.
 
-## Publicar
-Reemplaza el contenido del repositorio por los archivos de este paquete o, si prefieres, reemplaza `index.html`, `src/app.js` y `src/styles.css` y conserva la carpeta `public`.
-Cloudflare Pages debe desplegar automáticamente.
-
-## Nota
-El carrito sigue siendo demostrativo/local. Mercado Pago, persistencia de pedidos e inventario todavía no están conectados.
+Reemplaza `index.html`, `src/app.js` y `src/styles.css`. Conserva `public/`.
