@@ -121,3 +121,173 @@
   #home.hero > .headline span { font-size: 7.5vw !important; }
   #home.hero > .headline strong { font-size: 11.5vw !important; }
 }
+
+
+/* =========================================================
+   ONE HIT — MOBILE-ONLY COMPOSITION V1
+   Desktop rules above remain untouched.
+   ========================================================= */
+@media (max-width: 700px) {
+  /* Give the vertical composition enough room for product controls. */
+  #home.hero {
+    height: max(980px, 125svh) !important;
+    min-height: 980px !important;
+    max-height: none !important;
+    overflow: hidden;
+  }
+
+  /* Keep the mobile header compact and pinned to the top of the hero. */
+  #home .header,
+  .header {
+    height: 68px;
+    padding: 0 5%;
+    grid-template-columns: 1fr auto;
+  }
+
+  /* Strong two-line headline, centered horizontally in the composition
+     and positioned above the model's torso rather than over the face. */
+  #home.hero > .headline {
+    position: absolute !important;
+    top: 29% !important;
+    left: 5% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: max-content !important;
+    max-width: 90% !important;
+    transform: none !important;
+    z-index: 15 !important;
+    white-space: nowrap !important;
+    line-height: .9 !important;
+  }
+  #home.hero > .headline span {
+    font-size: clamp(30px, 8.1vw, 48px) !important;
+    line-height: .98 !important;
+    letter-spacing: -.065em !important;
+  }
+  #home.hero > .headline strong {
+    font-size: clamp(43px, 11.7vw, 68px) !important;
+    line-height: .98 !important;
+    letter-spacing: -.065em !important;
+  }
+
+  /* Model occupies the visual middle; smaller than the current mobile
+     version to keep face, graphic and purchase details readable. */
+  #home .model-window {
+    inset: 10% 0 30% !important;
+    z-index: 4;
+  }
+  #home .model-slide {
+    align-items: flex-end;
+  }
+  #home .model-slide img {
+    height: 100% !important;
+    width: auto !important;
+    max-width: 86vw !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+
+  /* Brand mark stays behind the model and clear of the headline. */
+  #home .giant-logo {
+    top: 48% !important;
+    right: 2% !important;
+    width: 88vw !important;
+    max-width: none !important;
+    z-index: 1 !important;
+  }
+
+  /* Navigation sits at the edge of the visual area, not over the controls. */
+  #home .arrows {
+    top: 55% !important;
+    right: 5% !important;
+    gap: 8px !important;
+    z-index: 16 !important;
+  }
+  #home .arrows button {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 20px !important;
+  }
+
+  /* Product information and purchase controls form one compact stack. */
+  #home .product-meta {
+    left: 5% !important;
+    right: 5% !important;
+    bottom: 24% !important;
+    gap: 6px !important;
+    z-index: 18 !important;
+  }
+  #home .product-meta small { font-size: 10px !important; }
+  #home .product-meta b {
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+  }
+  #home .product-meta span { font-size: 11px !important; }
+
+  #home .purchase-options {
+    left: 5% !important;
+    right: auto !important;
+    bottom: 12.5% !important;
+    gap: clamp(14px, 7vw, 30px) !important;
+    align-items: flex-end !important;
+    z-index: 19 !important;
+  }
+  #home .size-picker,
+  #home .quantity-picker { gap: 7px !important; }
+  #home .option-label {
+    font-size: 9px !important;
+    letter-spacing: .14em !important;
+  }
+  #home .size-options { gap: 5px !important; }
+  #home .size-options button {
+    width: clamp(31px, 9vw, 39px) !important;
+    height: 38px !important;
+    font-size: 11px !important;
+  }
+  #home .quantity-control { height: 38px !important; }
+  #home .quantity-control button {
+    width: 31px !important;
+    height: 36px !important;
+  }
+  #home .quantity-control output {
+    min-width: 26px !important;
+    font-size: 12px !important;
+  }
+
+  #home .buy {
+    left: 5% !important;
+    right: 5% !important;
+    bottom: 3.5% !important;
+    width: 90% !important;
+    min-width: 0 !important;
+    min-height: 54px !important;
+    padding: 15px 18px !important;
+    justify-content: space-between !important;
+    font-size: 10px !important;
+    z-index: 20 !important;
+  }
+
+  #home .indicators {
+    right: 5% !important;
+    bottom: 1.3% !important;
+    gap: 5px !important;
+    z-index: 17 !important;
+  }
+  #home .indicators button { width: 20px !important; }
+
+  /* Ensure no old desktop-only slogan styling reappears. */
+  #home .slogan { display: none !important; }
+}
+
+/* Extra narrow phones: preserve a single-line control row. */
+@media (max-width: 380px) {
+  #home.hero > .headline span { font-size: 7.7vw !important; }
+  #home.hero > .headline strong { font-size: 11vw !important; }
+  #home .purchase-options { gap: 12px !important; }
+  #home .size-options { gap: 3px !important; }
+  #home .size-options button {
+    width: 29px !important;
+    height: 35px !important;
+  }
+  #home .quantity-control button { width: 27px !important; }
+}
