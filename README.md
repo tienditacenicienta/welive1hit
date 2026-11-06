@@ -1,10 +1,11 @@
-# ONE HIT — refinamiento de portada y compra
+# ONE HIT — definitive headline fix
 
-Cambios:
-- Titular centrado verticalmente respecto al hero (`top: 50%` del contenedor), con alineación izquierda y delante del modelo.
-- Menor separación entre nombre/precio y selector de talla/cantidad.
-- Selector elevado para que no se superponga al botón de añadir.
-- Eliminado el texto rojo de validación. Si no se elige talla, no añade el producto; no aparece popup.
-- Se conserva el carrusel, imágenes, carrito y demás estilos.
+The previous headline rule was not reliably applying its absolute positioning. This patch explicitly sets the headline to `position:absolute` inside `#home.hero`, centers it at 50% of the hero height, and keeps it above the model.
 
-Reemplaza `index.html`, `src/app.js` y `src/styles.css`. Conserva `public/`.
+No changes to product metadata, size selector, quantity selector, add-to-bag button, logo, images, carousel or cart logic.
+
+Replace only:
+- `index.html`
+- `src/styles.css`
+
+Keep `src/app.js` and `public/` unchanged. The stylesheet URL version was updated to bypass cached CSS.
