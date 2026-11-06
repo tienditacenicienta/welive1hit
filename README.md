@@ -1,11 +1,8 @@
-# ONE HIT — definitive headline fix
+# ONE HIT — remove hero slogan
 
-The previous headline rule was not reliably applying its absolute positioning. This patch explicitly sets the headline to `position:absolute` inside `#home.hero`, centers it at 50% of the hero height, and keeps it above the model.
+This update removes only the hero slogan block:
+“WE LIVE 1HIT. / STREETWEAR / PERÚ”.
 
-No changes to product metadata, size selector, quantity selector, add-to-bag button, logo, images, carousel or cart logic.
+The slogan was an absolutely positioned decorative element, so removing its markup does not change the positioning or layout of the headline, model, large logo, product information, size/quantity controls, buttons, carousel, or cart behavior.
 
-Replace only:
-- `index.html`
-- `src/styles.css`
-
-Keep `src/app.js` and `public/` unchanged. The stylesheet URL version was updated to bypass cached CSS.
+Upload/replace the project files as usual. All existing images and application logic are retained.
