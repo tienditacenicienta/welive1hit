@@ -1,11 +1,10 @@
-# ONE HIT — Ajuste de titular
+# ONE HIT — headline true center fix
 
-Esta actualización conserva el diseño, el logotipo PNG, las fotografías, el carrusel, las flechas, los indicadores y el carrito.
+Esta actualización corrige únicamente la posición del titular:
+- Centrado vertical real respecto a la portada (`top: 50%` del hero).
+- Alineado a la izquierda como la referencia.
+- Delante del modelo mediante `z-index`.
+- Conserva las dos líneas y la escala tipográfica.
+- Se agrega versión nueva al CSS para evitar caché del navegador.
 
-Único ajuste visual:
-- El titular «CÓMO QUIERES / VERTE HOY» se posiciona al centro vertical de la portada, en primer plano sobre el modelo.
-- Se mantiene alineado a la izquierda como en la referencia.
-- Se añade una versión de URL con parámetro para evitar que el navegador conserve el CSS anterior en caché.
-
-## Publicación
-Reemplaza en GitHub los archivos `index.html` y `src/styles.css` con los de este paquete. Puedes subir también el README. No hace falta reemplazar imágenes ni `src/app.js`.
+Reemplaza `index.html` y `src/styles.css` en el repositorio. No reemplaces imágenes ni `src/app.js`.
