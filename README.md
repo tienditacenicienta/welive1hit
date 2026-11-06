@@ -1,11 +1,11 @@
-# ONEHIT — ajuste de titular V2
+# ONE HIT — Ajuste de titular
 
-Cambios de esta versión:
-- El titular «CÓMO QUIERES / VERTE HOY» queda en primer plano por encima del modelo.
-- Se centra verticalmente en la composición, siguiendo la referencia compartida.
-- Se conserva el modelo, logo PNG, carrusel, flechas, indicadores y resto de la tienda.
-- Se elimina un salto de línea literal que podía aparecer como texto suelto en la parte superior.
+Esta actualización conserva el diseño, el logotipo PNG, las fotografías, el carrusel, las flechas, los indicadores y el carrito.
 
-Subir todos los archivos del ZIP a la raíz del repositorio `welive1hit`, reemplazando los anteriores. Cloudflare Pages debe publicar desde la raíz (sin comando de build).
+Único ajuste visual:
+- El titular «CÓMO QUIERES / VERTE HOY» se posiciona al centro vertical de la portada, en primer plano sobre el modelo.
+- Se mantiene alineado a la izquierda como en la referencia.
+- Se añade una versión de URL con parámetro para evitar que el navegador conserve el CSS anterior en caché.
 
-No se modificaron las fotografías ni el comportamiento de la animación.
+## Publicación
+Reemplaza en GitHub los archivos `index.html` y `src/styles.css` con los de este paquete. Puedes subir también el README. No hace falta reemplazar imágenes ni `src/app.js`.
