@@ -535,3 +535,20 @@
  overflow:visible !important;
  white-space:nowrap;
 }
+
+/* The opening words stay completely still during the rotating phrases.
+   They fade only with the final outgoing phrase. */
+.manifesto-fixed{
+ opacity:1;
+ transform:none !important;
+ transition:opacity .65s ease !important;
+ width:auto !important;
+ overflow:visible !important;
+ white-space:nowrap;
+}
+.manifesto-fixed.is-hidden{
+ opacity:0;
+ transform:none !important;
+ width:auto !important;
+ overflow:visible !important;
+}
