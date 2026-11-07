@@ -142,7 +142,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.classList.remove("manifesto-wipe");
   phrase.classList.add("is-changing");
   await wait(650);
-  /* Restore the prefix and its first phrase in the same frame */
+  /* Restore prefix and first phrase simultaneously */
   phrase.textContent=phrases[0];
   line.classList.remove("manifesto-final");
   fixed.classList.remove("is-hidden");
@@ -150,9 +150,8 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   await wait(2800);
  };
  const run=async()=>{
+  await wait(2800); // initial "Qué bueno que toqué fondo."
   while(true){
-   for(const text of phrases) await showPhrase(text);
-   await showFinale();
    for(let i=1;i<phrases.length;i++) await showPhrase(phrases[i]);
    await showFinale();
   }
