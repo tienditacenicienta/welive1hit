@@ -133,6 +133,8 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.classList.add("is-changing");
   fixed.classList.add("is-hidden");
   await wait(650);
+  /* Remove both outgoing text nodes only after their fade has completed */
+  fixed.style.display="none";
   phrase.style.display="none";
   line.classList.add("manifesto-final");
   finale.classList.add("is-visible");
@@ -147,6 +149,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.textContent=phrases[0];
   phrase.classList.remove("is-changing");
   phrase.style.display="";
+  fixed.style.display="";
   fixed.classList.remove("is-hidden");
   await wait(2800);
  };
