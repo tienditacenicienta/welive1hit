@@ -472,3 +472,16 @@
  .manifesto-changing.manifesto-wipe{animation:none;clip-path:none}
  .manifesto-changing.is-changing{transition:none}
 }
+
+/* Finale typography and safe vertical mask: preserve the accent */
+.manifesto-mask{overflow:hidden;display:inline-block;vertical-align:baseline;padding:.14em 0 .08em;margin:-.14em 0 -.08em}
+.manifesto-changing.manifesto-wipe{animation:none;clip-path:none}
+.manifesto-changing.manifesto-wipe .final-regular,.manifesto-changing.manifesto-wipe .final-bold{
+ display:inline-block;animation:manifestoCharacterReveal 1.65s cubic-bezier(.77,0,.18,1) both
+}
+.manifesto-changing .final-regular{font-weight:400}
+.manifesto-changing .final-bold{font-weight:900}
+@keyframes manifestoCharacterReveal{
+ from{clip-path:inset(0 100% 0 0);transform:translateX(-.12em)}
+ to{clip-path:inset(0 0 0 0);transform:translateX(0)}
+}
