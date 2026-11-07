@@ -134,6 +134,8 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.classList.add("is-changing");
   fixed.classList.add("is-hidden");
   await wait(650);
+  /* Clear the previous sentence before centering the finale */
+  phrase.textContent="";
   line.classList.add("manifesto-final");
   phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
   phrase.classList.remove("is-changing");
