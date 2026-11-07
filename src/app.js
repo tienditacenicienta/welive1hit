@@ -1,80 +1,83 @@
-const products=[
+const heroProducts=[
  {name:"Polo gráfico 01 / Blanco",price:49},
  {name:"Polo básico / Negro",price:45},
  {name:"Polo gráfico 02 / Blanco",price:49},
- {name:"Polo gráfico 02 / Arena",price:49},
- {name:"Hoodie ONE HIT / Negro",price:89}
+ {name:"Polo gráfico 03 / Negro",price:49},
+ {name:"Polo gráfico 04 / Blanco",price:49}
 ];
 let current=0,cart=[],timer,selectedSize=null,quantity=1;
 const $=s=>document.querySelector(s);
-
 function show(i){
- current=(i+products.length)%products.length;
+ current=(i+heroProducts.length)%heroProducts.length;
  $("#model-track").style.transform=`translateX(-${current*20}%)`;
  $("#slide-number").textContent=`${String(current+1).padStart(2,"0")} / 05`;
- $("#product-name").textContent=products[current].name.toUpperCase();
- $("#product-price").textContent=`S/ ${products[current].price.toFixed(2)}`;
+ $("#product-name").textContent=heroProducts[current].name.toUpperCase();
+ $("#product-price").textContent=`S/ ${heroProducts[current].price.toFixed(2)}`;
  document.querySelectorAll("#indicators button").forEach((b,n)=>b.classList.toggle("active",n===current));
  restart();
 }
 function restart(){clearInterval(timer);timer=setInterval(()=>show(current+1),5500)}
-$("#prev").onclick=()=>show(current-1);
-$("#next").onclick=()=>show(current+1);
+$("#prev").onclick=()=>show(current-1);$("#next").onclick=()=>show(current+1);
 document.querySelectorAll("#indicators button").forEach((b,i)=>b.onclick=()=>show(i));
-
 function open(){ $("#drawer").classList.add("open");$("#backdrop").classList.add("open") }
 function close(){ $("#drawer").classList.remove("open");$("#backdrop").classList.remove("open") }
 $("#bag").onclick=open;$("#close").onclick=close;$("#backdrop").onclick=close;
-
 function updateSelection(){
  document.querySelectorAll("#size-options button").forEach(b=>b.classList.toggle("selected",b.dataset.size===selectedSize));
  $("#quantity").textContent=quantity;
 }
-document.querySelectorAll("#size-options button").forEach(b=>{
- b.addEventListener("click",()=>{
-  selectedSize=b.dataset.size;
-  updateSelection();
- });
-});
+document.querySelectorAll("#size-options button").forEach(b=>b.addEventListener("click",()=>{selectedSize=b.dataset.size;updateSelection()}));
 $("#qty-minus").onclick=()=>{quantity=Math.max(1,quantity-1);updateSelection()};
 $("#qty-plus").onclick=()=>{quantity=Math.min(20,quantity+1);updateSelection()};
-
 function render(){
- const units=cart.reduce((sum,p)=>sum+p.quantity,0);
- const subtotal=cart.reduce((sum,p)=>sum+p.price*p.quantity,0);
- $("#bag-count").textContent=units;
- $("#subtotal").textContent=`S/ ${subtotal.toFixed(2)}`;
- $("#checkout").disabled=!cart.length;
- $("#cart-items").innerHTML=cart.length?cart.map((p,i)=>
-  `<div class="cart-line">
-    <span><b>${p.name}</b><br><small>Talla ${p.size} · Cant. ${p.quantity}</small></span>
-    <b>S/ ${(p.price*p.quantity).toFixed(2)} <button data-remove="${i}" aria-label="Quitar producto">×</button></b>
-   </div>`
- ).join(""):"Tu bolsa está vacía.";
- document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{
-  cart.splice(Number(b.dataset.remove),1);render();
- });
+ const units=cart.reduce((s,p)=>s+p.quantity,0),subtotal=cart.reduce((s,p)=>s+p.price*p.quantity,0);
+ $("#bag-count").textContent=units;$("#subtotal").textContent=`S/ ${subtotal.toFixed(2)}`;$("#checkout").disabled=!cart.length;
+ $("#cart-items").innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><span><b>${p.name}</b><br><small>${p.color} · Talla ${p.size} · Cant. ${p.quantity}</small></span><b>S/ ${(p.price*p.quantity).toFixed(2)} <button data-remove="${i}" aria-label="Quitar producto">×</button></b></div>`).join(""):"Tu bolsa está vacía.";
+ document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(Number(b.dataset.remove),1);render()});
 }
 $("#buy").onclick=()=>{
- if(!selectedSize){
-  return;
-  return;
- }
- const p=products[current];
- const existing=cart.find(item=>item.name===p.name&&item.size===selectedSize);
- if(existing) existing.quantity+=quantity;
- else cart.push({...p,size:selectedSize,quantity});
- render();
- selectedSize=null;quantity=1;updateSelection();
- open();
+ if(!selectedSize)return;
+ const p=heroProducts[current],item={name:p.name,price:p.price,color:"Blanco",size:selectedSize,quantity};
+ const old=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
+ if(old)old.quantity+=quantity;else cart.push(item);
+ render();selectedSize=null;quantity=1;updateSelection();open();
 };
 $("#checkout").onclick=()=>alert("Checkout de demostración. Mercado Pago aún no está conectado.");
 
-$("#shop-grid").innerHTML=products.map((p,i)=>
- `<article class="shop-card">
-   <img src="/public/models/model-white.webp" alt="">
-   <p>${p.name.toUpperCase()} · S/ ${p.price}</p>
-  </article>`
-).join("");
-
+const catalog=[
+ {name:"PROV. 17:22",price:45,colors:["Blanco","Negro","Gris"],image:"/public/models/model-white.webp"},
+ {name:"ONE MOMENT",price:45,colors:["Negro","Blanco"],image:"/public/models/model-black.webp"},
+ {name:"NO FEAR",price:49,colors:["Blanco","Negro","Gris"],image:"/public/models/model-graphic.webp"},
+ {name:"LIVE YOUR 1HIT",price:49,colors:["Negro","Blanco"],image:"/public/models/model-alt.webp"},
+ {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"],image:"/public/models/model-white.webp"},
+ {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"],image:"/public/models/model-black.webp"},
+ {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"],image:"/public/models/model-graphic.webp"},
+ {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"],image:"/public/models/model-alt.webp"}
+];
+const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
+$("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
+ <div class="shop-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
+ <div class="shop-info"><div class="shop-name-row"><h3>${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
+ <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
+ <div class="shop-controls"><label><span class="shop-label">TALLA</span><select class="card-size"><option value="">Elegir</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></label>
+ <label><span class="shop-label">CANT.</span><select class="card-qty"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></div>
+ <button class="card-add" type="button">AÑADIR A LA BOLSA ↗</button></div>
+ </article>`).join("");
+document.querySelectorAll(".shop-card").forEach(card=>{
+ let chosenColor=catalog[Number(card.dataset.product)].colors[0];
+ card.querySelectorAll(".swatch").forEach(btn=>btn.onclick=()=>{
+  chosenColor=btn.dataset.color;
+  card.querySelectorAll(".swatch").forEach(x=>x.classList.toggle("active",x===btn));
+  card.querySelector(".selected-color").textContent=chosenColor;
+  card.querySelector(".shop-image img").style.filter=chosenColor==="Negro"?"brightness(.78) contrast(1.12)":chosenColor==="Gris"?"grayscale(.65)":"none";
+ });
+ card.querySelector(".card-add").onclick=()=>{
+  const p=catalog[Number(card.dataset.product)],size=card.querySelector(".card-size").value;
+  if(!size){card.querySelector(".card-size").focus();return}
+  const qty=Number(card.querySelector(".card-qty").value),item={name:p.name,price:p.price,color:chosenColor,size,quantity:qty};
+  const old=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
+  if(old)old.quantity+=qty;else cart.push(item);
+  render();open();
+ };
+});
 updateSelection();show(0);render();
