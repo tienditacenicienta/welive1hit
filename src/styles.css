@@ -510,3 +510,21 @@
  .manifesto-finale.manifesto-wipe .final-regular,
  .manifesto-finale.manifesto-wipe .final-bold{animation:none}
 }
+
+/* Final state is an overlay, never a second flex-row item */
+.manifesto-line{position:relative}
+.manifesto-line.manifesto-final .manifesto-fixed,
+.manifesto-line.manifesto-final .manifesto-mask{display:none !important}
+.manifesto-line .manifesto-finale{
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%);
+ width:max-content;
+ max-width:100%;
+ margin:0;
+ text-align:center;
+ pointer-events:none;
+}
+.manifesto-line.manifesto-final{min-height:1.05em}
+.manifesto-line.manifesto-final .manifesto-finale.is-visible{display:block}
