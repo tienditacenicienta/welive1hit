@@ -117,7 +117,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  if(!phrase)return;
- const phrases=["toqué fondo.","fallé una vez.","encontré un camino.","estoy en ONE HIT."];
+ const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino.","encontré ONE HIT."];
  let index=0;
  window.setInterval(()=>{
   phrase.classList.add("is-changing");
