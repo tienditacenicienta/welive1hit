@@ -113,43 +113,44 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* ONE HIT manifesto: premium finale, then repeat forever */
+/* ONE HIT manifesto: sequential transitions, no overlapping text */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  const fixed=document.querySelector(".manifesto-fixed");
  const line=document.querySelector(".manifesto-line");
  if(!phrase||!fixed||!line)return;
- const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino."];
- let index=0;
- const pause=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
- const transition=async()=>{
-  phrase.classList.remove("manifesto-grand");
+ const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","encontré un camino."];
+ const wait=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
+ const showPhrase=async(text)=>{
+  phrase.classList.remove("manifesto-wipe");
   phrase.classList.add("is-changing");
-  await pause(420);
-  index++;
-  if(index<phrases.length){
-   phrase.textContent=phrases[index];
-   phrase.classList.remove("is-changing");
-   await pause(2380);
-   return transition();
-  }
-  fixed.classList.add("is-hidden");
-  line.classList.add("manifesto-final");
-  phrase.textContent="ENCONTRÉ ONE HIT.";
+  await wait(650);
+  phrase.textContent=text;
   phrase.classList.remove("is-changing");
-  void phrase.offsetWidth;
-  phrase.classList.add("manifesto-grand");
-  await pause(3600);
-  phrase.classList.remove("manifesto-grand");
-  line.classList.remove("manifesto-final");
-  fixed.classList.remove("is-hidden");
-  phrase.classList.add("is-changing");
-  await pause(420);
-  index=0;
-  phrase.textContent=phrases[0];
-  phrase.classList.remove("is-changing");
-  await pause(2380);
-  return transition();
+  await wait(2800);
  };
- transition();
+ const run=async()=>{
+  while(true){
+   for(let i=0;i<phrases.length;i++) await showPhrase(phrases[i]);
+   phrase.classList.add("is-changing");
+   await wait(650);
+   fixed.classList.add("is-hidden");
+   line.classList.add("manifesto-final");
+   phrase.textContent="ENCONTRÉ ONE HIT.";
+   phrase.classList.remove("is-changing");
+   void phrase.offsetWidth;
+   phrase.classList.add("manifesto-wipe");
+   await wait(4200);
+   phrase.classList.remove("manifesto-wipe");
+   phrase.classList.add("is-changing");
+   await wait(650);
+   line.classList.remove("manifesto-final");
+   fixed.classList.remove("is-hidden");
+   phrase.textContent=phrases[0];
+   phrase.classList.remove("is-changing");
+   await wait(2800);
+   for(let i=1;i<phrases.length;i++) await showPhrase(phrases[i]);
+  }
+ };
+ run();
 })();
