@@ -383,3 +383,5 @@
  .shop-title{justify-content:flex-start;text-align:left}
  .shop-title h2{font-size:clamp(30px,7.4vw,48px);white-space:normal}
 }
+
+.shop-title h2 strong.shop-title-tu{font-weight:900}
