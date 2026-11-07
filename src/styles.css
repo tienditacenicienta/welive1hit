@@ -385,3 +385,49 @@
 }
 
 .shop-title h2 strong.shop-title-tu{font-weight:900}
+
+/* ONE HIT manifesto strip */
+.onehit-manifesto{
+ width:100%;
+ min-height:clamp(240px,30vw,410px);
+ padding:64px 6%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ background:#050505;
+ color:#fff;
+}
+.manifesto-line{
+ display:flex;
+ align-items:baseline;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:.22em;
+ width:100%;
+ margin:0;
+ color:#fff;
+ font-family:"DM Sans",Arial,sans-serif;
+ font-size:clamp(34px,6.3vw,88px);
+ line-height:1.05;
+ letter-spacing:-.055em;
+ font-weight:400;
+ text-align:center;
+}
+.manifesto-fixed{white-space:nowrap;font-weight:400}
+.manifesto-changing{
+ display:inline-block;
+ min-width:0;
+ font-weight:900;
+ opacity:1;
+ transform:translateY(0);
+ transition:opacity .42s ease,transform .42s ease;
+}
+.manifesto-changing.is-changing{opacity:0;transform:translateY(18px)}
+@media(max-width:700px){
+ .onehit-manifesto{min-height:250px;padding:52px 7%}
+ .manifesto-line{font-size:clamp(32px,9vw,54px);gap:.16em}
+}
+@media(prefers-reduced-motion:reduce){
+ .manifesto-changing{transition:none}
+}
