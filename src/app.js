@@ -119,7 +119,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  const fixed=document.querySelector(".manifesto-fixed");
  const line=document.querySelector(".manifesto-line");
  if(!phrase||!fixed||!line)return;
- const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","encontré un camino."];
+ const phrases=["toqué fondo.","fallé mil veces.","no me rendí.","encontré un camino."];
  const wait=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
  const showPhrase=async(text)=>{
   phrase.classList.remove("manifesto-wipe");
@@ -130,17 +130,17 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   await wait(2800);
  };
  const showFinale=async()=>{
-  /* Both parts of the sentence fade out together */
+  /* Fade the full sentence, then keep the phrase layer empty while centering the finale */
   phrase.classList.add("is-changing");
   fixed.classList.add("is-hidden");
-  await wait(650);
-  /* Remove the outgoing phrase for a full paint before inserting the finale */
+  await wait(700);
   phrase.replaceChildren();
-  void phrase.offsetHeight;
-  await wait(100);
+  phrase.style.visibility="hidden";
   line.classList.add("manifesto-final");
+  await wait(120);
   phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
   phrase.classList.remove("is-changing");
+  phrase.style.visibility="visible";
   void phrase.offsetWidth;
   phrase.classList.add("manifesto-wipe");
   await wait(4200);
