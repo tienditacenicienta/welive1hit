@@ -658,3 +658,10 @@
  .about h2{flex-wrap:wrap;row-gap:.18em}
  .about-socials{gap:.12em}
 }
+
+/* Social links share the text baseline */
+.about h2{display:block}
+.about-socials{vertical-align:baseline;position:relative;top:-.035em}
+.about-social-icon{vertical-align:baseline;text-decoration:none;cursor:pointer}
+.about-social-icon:hover{background:#242424;transform:translateY(-.06em)}
+.about-social-icon:focus-visible{outline:2px solid #fff;outline-offset:4px}
