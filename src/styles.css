@@ -431,3 +431,7 @@
 @media(prefers-reduced-motion:reduce){
  .manifesto-changing{transition:none}
 }
+
+.manifesto-fixed{transition:opacity .42s ease,transform .42s ease}
+.manifesto-fixed.is-hidden{opacity:0;transform:translateY(-12px);width:0;overflow:hidden;white-space:nowrap}
+.manifesto-line.manifesto-final{justify-content:center}
