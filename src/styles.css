@@ -552,3 +552,33 @@
  width:auto !important;
  overflow:visible !important;
 }
+
+/* ONE HIT lifestyle film — temporary animated collage placeholder */
+.lifestyle-film{background:#080808;color:#fff;padding:74px 5.5% 34px;overflow:hidden}
+.lifestyle-film-head,.lifestyle-film-foot{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.lifestyle-film-head p{font-size:11px;font-weight:900;letter-spacing:.16em;margin:0}
+.lifestyle-film-head span,.lifestyle-film-foot span{font-size:9px;font-weight:800;letter-spacing:.14em;color:#aaa}
+.film-collage{height:clamp(300px,48vw,650px);margin:28px 0 22px;position:relative;display:grid;grid-template-columns:1.1fr .8fr 1.15fr .85fr 1fr;gap:9px;overflow:hidden;background:#151515}
+.film-tile{position:relative;overflow:hidden;background:#222;animation:filmCut 5.5s steps(1,end) infinite;isolation:isolate}
+.film-tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);opacity:.78;transform:scale(1.08);animation:filmPush 3.2s ease-in-out infinite alternate}
+.film-tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,#0009)}
+.film-tile span{position:absolute;z-index:2;left:14px;bottom:16px;font-size:clamp(12px,2vw,22px);font-weight:900;letter-spacing:-.04em}
+.film-tile-b{animation-delay:.18s}.film-tile-c{animation-delay:.36s}.film-tile-d{animation-delay:.54s}.film-tile-e{animation-delay:.72s}
+.film-tile-b img{animation-delay:-.7s}.film-tile-c img{animation-delay:-1.2s}.film-tile-d img{animation-delay:-1.8s}.film-tile-e img{animation-delay:-2.3s}
+.film-center-mark{position:absolute;z-index:3;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:clamp(14px,2vw,24px);font-weight:500;line-height:.9;letter-spacing:-.04em;text-shadow:0 2px 20px #000}
+.film-center-mark strong{font-size:clamp(54px,12vw,150px);font-weight:900;letter-spacing:-.09em}
+.lifestyle-film-foot{padding-top:4px}
+@keyframes filmPush{from{transform:scale(1.04) translateY(1%)}to{transform:scale(1.18) translateY(-2%)}}
+@keyframes filmCut{0%,18%{filter:brightness(1)}20%,38%{filter:brightness(.72)}40%,58%{filter:brightness(1.12)}60%,78%{filter:brightness(.82)}80%,100%{filter:brightness(1)}}
+@media(max-width:700px){
+ .lifestyle-film{padding:54px 5% 26px}
+ .lifestyle-film-head span{display:none}
+ .film-collage{height:420px;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr}
+ .film-tile-a{grid-column:1;grid-row:1}
+ .film-tile-b{grid-column:2;grid-row:1}
+ .film-tile-c{grid-column:3;grid-row:1}
+ .film-tile-d{grid-column:1 / span 2;grid-row:2}
+ .film-tile-e{grid-column:3;grid-row:2}
+ .lifestyle-film-foot span{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.film-tile,.film-tile img{animation:none}}
