@@ -485,3 +485,28 @@
  from{clip-path:inset(0 100% 0 0);transform:translateX(-.12em)}
  to{clip-path:inset(0 0 0 0);transform:translateX(0)}
 }
+
+/* Dedicated finale layer: never reuse the rotating phrase node */
+.manifesto-finale{
+ display:none;
+ opacity:0;
+ white-space:nowrap;
+ font-weight:400;
+ will-change:opacity,transform,clip-path;
+}
+.manifesto-line.manifesto-final{justify-content:center}
+.manifesto-finale.is-visible{display:inline-block;opacity:1}
+.manifesto-finale.is-changing{opacity:0;transition:opacity .65s ease}
+.manifesto-finale .final-regular{font-weight:400}
+.manifesto-finale .final-bold{font-weight:900}
+.manifesto-finale.manifesto-wipe .final-regular,
+.manifesto-finale.manifesto-wipe .final-bold{
+ display:inline-block;
+ animation:manifestoCharacterReveal 1.65s cubic-bezier(.77,0,.18,1) both;
+}
+@media(max-width:700px){.manifesto-finale{white-space:normal;text-align:center}}
+@media(prefers-reduced-motion:reduce){
+ .manifesto-finale.is-changing{transition:none}
+ .manifesto-finale.manifesto-wipe .final-regular,
+ .manifesto-finale.manifesto-wipe .final-bold{animation:none}
+}
