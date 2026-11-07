@@ -123,9 +123,11 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  const phrases=["toqué fondo.","fallé mil veces.","no me rendí.","encontré un camino."];
  const wait=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
  const showPhrase=async(text)=>{
-  phrase.classList.remove("is-changing");
+  /* Only the changing phrase fades; the opening words never move or fade here */
+  phrase.classList.add("is-changing");
+  await wait(650);
   phrase.textContent=text;
-  void phrase.offsetWidth;
+  phrase.classList.remove("is-changing");
   await wait(2800);
  };
  const showFinale=async()=>{
