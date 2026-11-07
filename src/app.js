@@ -130,9 +130,10 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   await wait(2800);
  };
  const showFinale=async()=>{
+  /* Both parts of the sentence fade out together */
   phrase.classList.add("is-changing");
-  await wait(650);
   fixed.classList.add("is-hidden");
+  await wait(650);
   line.classList.add("manifesto-final");
   phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
   phrase.classList.remove("is-changing");
