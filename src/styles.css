@@ -291,3 +291,42 @@
   }
   #home .quantity-control button { width: 27px !important; }
 }
+
+/* TIENDA ONE HIT — catálogo 8 productos */
+.shop{padding:110px 4.8% 125px}
+.shop-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.shop-title p{margin:0 0 8px}
+.shop-title h2{font-size:clamp(58px,8vw,110px);margin:10px 0 0}
+.shop-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 16px}
+.shop-card{min-height:0;background:#fff;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+.shop-image{height:clamp(260px,32vw,440px);background:#f4f4f2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop-image img{height:94%;width:92%;object-fit:contain;mix-blend-mode:multiply;transition:filter .2s,transform .35s}
+.shop-card:hover .shop-image img{transform:scale(1.035)}
+.shop-info{padding:14px 0 0}
+.shop-name-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.shop-name-row h3{font-size:12px;font-weight:900;letter-spacing:.04em;margin:0}
+.shop-name-row>b{font-size:12px;white-space:nowrap}
+.shop-color-row{display:flex;align-items:center;gap:9px;margin-top:13px;min-height:22px}
+.shop-label{font-size:8px;font-weight:900;letter-spacing:.14em;color:#555}
+.shop-swatches{display:flex;gap:6px}
+.swatch{width:16px;height:16px;border-radius:50%;background:var(--swatch);border:1px solid #c9c9c9;padding:0;outline:1px solid transparent;outline-offset:2px}
+.swatch.active{outline-color:#111}
+.selected-color{font-size:9px;color:#555}
+.shop-controls{display:flex;gap:12px;margin-top:13px}
+.shop-controls label{display:flex;flex-direction:column;gap:5px;flex:1}
+.card-size,.card-qty{height:34px;border:1px solid #d1d1d1;background:#fff;padding:0 8px;font:700 10px "DM Sans";border-radius:0}
+.card-add{width:100%;height:40px;margin-top:10px;background:#080808;color:#fff;border:0;font-size:9px;font-weight:900;letter-spacing:.1em}
+.card-add:hover{background:#333}
+@media(max-width:700px){
+ .shop{padding:76px 5% 85px}
+ .shop-title{display:block;margin-bottom:24px}
+ .shop-title h2{font-size:19vw;margin:14px 0 0}
+ .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}
+ .shop-image{height:clamp(210px,64vw,330px)}
+ .shop-info{padding-top:10px}
+ .shop-name-row h3,.shop-name-row>b{font-size:10px}
+ .shop-color-row{gap:7px;margin-top:10px;flex-wrap:wrap}
+ .shop-controls{gap:7px;margin-top:10px}
+ .card-size,.card-qty{height:32px}
+ .card-add{height:38px;font-size:8px}
+}
