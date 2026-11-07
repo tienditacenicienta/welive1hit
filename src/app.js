@@ -85,10 +85,17 @@ $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-pr
  <div class="shop-image"><img src="/public/models/model-white.webp" alt="${p.name}" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3>${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
- <div class="shop-controls"><label><span class="shop-label">TALLA</span><select class="card-size"><option value="">Elegir</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></label><label><span class="shop-label">CANT.</span><select class="card-qty"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></div>
+ <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
  <button class="card-add" type="button">AÑADIR A LA BOLSA ↗</button></div></article>`).join("");
 document.querySelectorAll(".shop-card").forEach(card=>{
- let chosenColor=catalog[Number(card.dataset.product)].colors[0];
+ let chosenColor=catalog[Number(card.dataset.product)].colors[0],chosenSize=null,qty=1;
+ const sizeButtons=card.querySelectorAll(".card-sizes button"),quantityOut=card.querySelector(".card-quantity");
+ sizeButtons.forEach(btn=>btn.onclick=()=>{
+  chosenSize=btn.dataset.size;
+  sizeButtons.forEach(x=>x.classList.toggle("selected",x===btn));
+ });
+ card.querySelector(".qty-minus").onclick=()=>{qty=Math.max(1,qty-1);quantityOut.textContent=qty};
+ card.querySelector(".qty-plus").onclick=()=>{qty=Math.min(20,qty+1);quantityOut.textContent=qty};
  card.querySelectorAll(".swatch").forEach(btn=>btn.onclick=()=>{
   chosenColor=btn.dataset.color;
   card.querySelectorAll(".swatch").forEach(x=>x.classList.toggle("active",x===btn));
@@ -97,13 +104,11 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   img.style.filter=chosenColor==="Negro"?"brightness(.72) contrast(1.15)":chosenColor==="Gris"?"grayscale(.7)":"none";
  });
  card.querySelector(".card-add").onclick=()=>{
-  const p=catalog[Number(card.dataset.product)],size=card.querySelector(".card-size").value;
-  if(!size){card.querySelector(".card-size").focus();return}
-  const qty=Number(card.querySelector(".card-qty").value),item={name:p.name,price:p.price,color:chosenColor,size,quantity:qty};
+  const p=catalog[Number(card.dataset.product)];
+  if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}
+  const item={name:p.name,price:p.price,color:chosenColor,size:chosenSize,quantity:qty};
   const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
   if(existing)existing.quantity+=qty;else cart.push(item);
   render();open();
  };
-});;
-
-updateSelection();show(0);render();
+});updateSelection();show(0);render();
