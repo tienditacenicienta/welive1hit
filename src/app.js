@@ -24,7 +24,13 @@ document.querySelectorAll("#indicators button").forEach((b,i)=>b.onclick=()=>sho
 
 function open(){ $("#drawer").classList.add("open");$("#backdrop").classList.add("open") }
 function close(){ $("#drawer").classList.remove("open");$("#backdrop").classList.remove("open") }
-$("#bag").onclick=open;$("#lifestyle-cart-trigger").onclick=open;$("#close").onclick=close;$("#backdrop").onclick=close;
+$("#bag").onclick=open;
+$("#lifestyle-cart-trigger").addEventListener("click",event=>{
+ event.preventDefault();
+ render();
+ open();
+});
+$("#close").onclick=close;$("#backdrop").onclick=close;
 
 function updateSelection(){
  document.querySelectorAll("#size-options button").forEach(b=>b.classList.toggle("selected",b.dataset.size===selectedSize));
