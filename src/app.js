@@ -113,7 +113,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* ONE HIT manifesto: one complete phrase cycle, then the signature finale */
+/* ONE HIT manifesto: seamless loop, prefix and first phrase return together */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  const fixed=document.querySelector(".manifesto-fixed");
@@ -142,12 +142,18 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.classList.remove("manifesto-wipe");
   phrase.classList.add("is-changing");
   await wait(650);
+  /* Restore the prefix and its first phrase in the same frame */
+  phrase.textContent=phrases[0];
   line.classList.remove("manifesto-final");
   fixed.classList.remove("is-hidden");
+  phrase.classList.remove("is-changing");
+  await wait(2800);
  };
  const run=async()=>{
   while(true){
    for(const text of phrases) await showPhrase(text);
+   await showFinale();
+   for(let i=1;i<phrases.length;i++) await showPhrase(phrases[i]);
    await showFinale();
   }
  };
