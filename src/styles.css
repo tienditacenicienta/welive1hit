@@ -330,3 +330,25 @@
  .card-size,.card-qty{height:32px}
  .card-add{height:38px;font-size:8px}
 }
+
+/* Refinamiento tienda: controles idénticos al selector de portada */
+.shop-title{justify-content:flex-end}
+.shop-controls{display:flex;align-items:flex-end;gap:16px;margin-top:14px}
+.shop-controls .size-picker,.shop-controls .quantity-picker{display:flex;flex-direction:column;gap:8px;min-width:0}
+.shop-controls .option-label{font-size:9px;font-weight:900;letter-spacing:.16em}
+.shop-controls .size-options{display:flex;gap:5px}
+.shop-controls .size-options button{width:34px;height:34px;border:1px solid #111;background:#fff;color:#111;font-size:11px;font-weight:800;transition:background .18s,color .18s}
+.shop-controls .size-options button:hover,.shop-controls .size-options button.selected{background:#080808;color:#fff}
+.shop-controls .quantity-control{height:34px;display:flex;align-items:center;border:1px solid #111}
+.shop-controls .quantity-control button{width:27px;height:32px;border:0;background:#fff;color:#111;font-size:18px;line-height:1}
+.shop-controls .quantity-control output{min-width:22px;text-align:center;font-size:11px;font-weight:800}
+@media(max-width:700px){
+ .shop-controls{gap:9px;margin-top:10px}
+ .shop-controls .size-picker,.shop-controls .quantity-picker{gap:6px}
+ .shop-controls .option-label{font-size:8px}
+ .shop-controls .size-options{gap:3px}
+ .shop-controls .size-options button{width:27px;height:30px;font-size:10px}
+ .shop-controls .quantity-control{height:30px}
+ .shop-controls .quantity-control button{width:23px;height:28px}
+ .shop-controls .quantity-control output{min-width:19px}
+}
