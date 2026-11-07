@@ -113,49 +113,45 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* ONE HIT manifesto: seamless loop, prefix and first phrase return together */
+/* ONE HIT manifesto: independent phrase and finale layers */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  const fixed=document.querySelector(".manifesto-fixed");
  const line=document.querySelector(".manifesto-line");
- if(!phrase||!fixed||!line)return;
+ const finale=document.getElementById("manifesto-finale");
+ if(!phrase||!fixed||!line||!finale)return;
  const phrases=["toqué fondo.","fallé mil veces.","no me rendí.","encontré un camino."];
  const wait=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
  const showPhrase=async(text)=>{
-  phrase.classList.remove("manifesto-wipe");
-  phrase.classList.add("is-changing");
-  await wait(650);
-  phrase.textContent=text;
   phrase.classList.remove("is-changing");
+  phrase.textContent=text;
+  void phrase.offsetWidth;
   await wait(2800);
  };
  const showFinale=async()=>{
-  /* Fade the full sentence, then keep the phrase layer empty while centering the finale */
+  /* Fade both parts of the outgoing sentence together */
   phrase.classList.add("is-changing");
   fixed.classList.add("is-hidden");
-  await wait(700);
-  phrase.replaceChildren();
-  phrase.style.visibility="hidden";
-  line.classList.add("manifesto-final");
-  await wait(120);
-  phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
-  phrase.classList.remove("is-changing");
-  phrase.style.visibility="visible";
-  void phrase.offsetWidth;
-  phrase.classList.add("manifesto-wipe");
-  await wait(4200);
-  phrase.classList.remove("manifesto-wipe");
-  phrase.classList.add("is-changing");
   await wait(650);
-  /* Restore prefix and first phrase simultaneously */
-  phrase.textContent=phrases[0];
+  phrase.style.display="none";
+  line.classList.add("manifesto-final");
+  finale.classList.add("is-visible");
+  void finale.offsetWidth;
+  finale.classList.add("manifesto-wipe");
+  await wait(4200);
+  finale.classList.remove("manifesto-wipe");
+  finale.classList.add("is-changing");
+  await wait(650);
+  finale.classList.remove("is-visible","is-changing");
   line.classList.remove("manifesto-final");
-  fixed.classList.remove("is-hidden");
+  phrase.textContent=phrases[0];
   phrase.classList.remove("is-changing");
+  phrase.style.display="";
+  fixed.classList.remove("is-hidden");
   await wait(2800);
  };
  const run=async()=>{
-  await wait(2800); // initial "Qué bueno que toqué fondo."
+  await wait(2800);
   while(true){
    for(let i=1;i<phrases.length;i++) await showPhrase(phrases[i]);
    await showFinale();
