@@ -621,3 +621,28 @@
  .footer-links{justify-content:flex-start;gap:13px 18px}
  .footer-links a{font-size:9px}
 }
+
+/* Legal information pages */
+.legal-page{background:#fff;color:#080808;min-height:100vh}
+.legal-top{padding:26px 6%;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center}
+.legal-top a{font-weight:900;letter-spacing:-.06em;font-size:22px}
+.legal-top span{font-size:10px;letter-spacing:.14em;font-weight:800}
+.legal-wrap{max-width:900px;margin:0 auto;padding:76px 6% 110px}
+.legal-kicker{font-size:10px;letter-spacing:.16em;font-weight:900}
+.legal-wrap h1{font:clamp(42px,7vw,76px)/.95 "Archivo Black",Impact,sans-serif;letter-spacing:-.07em;margin:18px 0 16px}
+.legal-intro{font-size:15px;color:#666;line-height:1.7;max-width:680px;margin-bottom:52px}
+.legal-section{padding:30px 0;border-top:1px solid #ddd;scroll-margin-top:24px}
+.legal-section h2{font-size:23px;letter-spacing:-.04em;margin:0 0 16px}
+.legal-section h3{font-size:14px;margin:24px 0 8px}
+.legal-section p,.legal-section li{font-size:14px;line-height:1.8;color:#555}
+.legal-section ul{padding-left:20px}
+.legal-notice{background:#f3f3f3;padding:16px 18px;margin:22px 0;font-size:12px;line-height:1.7;color:#555}
+.legal-back{display:inline-block;margin-top:35px;font-size:11px;font-weight:900;letter-spacing:.1em}
+.claim-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.claim-form label{display:flex;flex-direction:column;gap:7px;font-size:11px;font-weight:800;letter-spacing:.06em}
+.claim-form input,.claim-form select,.claim-form textarea{border:1px solid #ccc;border-radius:0;padding:13px;font:14px "DM Sans",Arial;background:#fff;min-width:0}
+.claim-form textarea{min-height:120px;resize:vertical}
+.claim-full{grid-column:1/-1}
+.claim-form button{background:#080808;color:#fff;border:0;padding:16px;font-size:11px;font-weight:900;letter-spacing:.12em}
+.claim-form button:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:650px){.legal-top{padding:22px 5%}.legal-wrap{padding:55px 5% 80px}.claim-form{grid-template-columns:1fr}.claim-full{grid-column:auto}.legal-section h2{font-size:20px}}
