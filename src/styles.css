@@ -713,3 +713,13 @@
  .custom-order{align-items:stretch}
  .custom-order-description{font-size:17px;line-height:1.5}
 }
+
+/* Desktop: intentional two-line rhythm for the custom-order message */
+@media(min-width:701px){
+ .custom-order-description{max-width:1250px}
+ .custom-order-copy{max-width:1250px;flex:1 1 auto}
+ .custom-order{gap:40px}
+}
+@media(max-width:700px){
+ .custom-order-desktop-break{display:none}
+}
