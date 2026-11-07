@@ -113,18 +113,25 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* Animated ONE HIT manifesto — only the second phrase changes */
+/* ONE HIT manifesto: final phrase closes without the fixed opening */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
- if(!phrase)return;
- const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino.","encontré ONE HIT."];
+ const fixed=document.querySelector(".manifesto-fixed");
+ const line=document.querySelector(".manifesto-line");
+ if(!phrase||!fixed||!line)return;
+ const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino.","Encontré ONE HIT."];
  let index=0;
- window.setInterval(()=>{
+ const timer=window.setInterval(()=>{
   phrase.classList.add("is-changing");
   window.setTimeout(()=>{
-   index=(index+1)%phrases.length;
+   index++;
    phrase.textContent=phrases[index];
    phrase.classList.remove("is-changing");
+   if(index===phrases.length-1){
+    fixed.classList.add("is-hidden");
+    line.classList.add("manifesto-final");
+    window.clearInterval(timer);
+   }
   },420);
  },2800);
 })();
