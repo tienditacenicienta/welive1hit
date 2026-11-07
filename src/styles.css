@@ -528,3 +528,10 @@
 }
 .manifesto-line.manifesto-final{min-height:1.05em}
 .manifesto-line.manifesto-final .manifesto-finale.is-visible{display:block}
+
+/* Keep the opening words' layout width during fade; prevent the last phrase from sliding to center */
+.manifesto-fixed.is-hidden{
+ width:auto !important;
+ overflow:visible !important;
+ white-space:nowrap;
+}
