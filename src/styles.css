@@ -665,3 +665,35 @@
 .about-social-icon{vertical-align:baseline;text-decoration:none;cursor:pointer}
 .about-social-icon:hover{background:#242424;transform:translateY(-.06em)}
 .about-social-icon:focus-visible{outline:2px solid #fff;outline-offset:4px}
+
+/* ONE HIT — custom design and bulk order invitation */
+.custom-order{
+ background:#f1f1f1;
+ color:#080808;
+ padding:clamp(54px,8vw,108px) 7%;
+ display:flex;
+ align-items:flex-end;
+ justify-content:space-between;
+ gap:48px;
+}
+.custom-order-copy{max-width:760px}
+.custom-order-kicker{font-size:10px;font-weight:900;letter-spacing:.17em;margin:0 0 24px}
+.custom-order h2{font:clamp(48px,8.2vw,112px)/.88 "Archivo Black",Impact,sans-serif;letter-spacing:-.075em;margin:0 0 24px}
+.custom-order h2 span{font-family:"DM Sans",Arial,sans-serif;font-weight:500}
+.custom-order-description{max-width:490px;margin:0;color:#666;font-size:14px;line-height:1.65}
+.custom-order-cta{
+ min-width:260px;min-height:58px;padding:0 22px;background:#080808;color:#fff;
+ display:flex;align-items:center;justify-content:space-between;gap:22px;
+ text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.12em;
+ transition:background .2s ease,transform .2s ease;
+}
+.custom-order-cta:hover{background:#292929;transform:translateY(-2px)}
+.custom-order-cta:focus-visible{outline:2px solid #080808;outline-offset:4px}
+.custom-order-arrow{font-size:22px;font-weight:400}
+@media(max-width:700px){
+ .custom-order{padding:58px 5%;align-items:stretch;flex-direction:column;gap:30px}
+ .custom-order-kicker{font-size:9px;margin-bottom:20px}
+ .custom-order h2{font-size:clamp(50px,13vw,76px);margin-bottom:20px}
+ .custom-order-description{font-size:13px}
+ .custom-order-cta{width:100%;min-height:54px}
+}
