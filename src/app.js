@@ -55,14 +55,41 @@ const catalog=[
  {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"],image:"/public/models/model-alt.webp"}
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
+const catalog=[
+ {name:"PROV. 17:22",price:49,colors:["Blanco","Negro","Gris"]},
+ {name:"ONE MOMENT",price:49,colors:["Negro","Blanco"]},
+ {name:"NO FEAR",price:49,colors:["Blanco","Negro","Gris"]},
+ {name:"LIVE YOUR 1HIT",price:49,colors:["Negro","Blanco"]},
+ {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
+ {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
+ {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
+ {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]}
+];
+const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
- <div class="shop-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
+ <div class="shop-image"><img src="/public/models/model-white.webp" alt="${p.name}" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3>${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
- <div class="shop-controls"><label><span class="shop-label">TALLA</span><select class="card-size"><option value="">Elegir</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></label>
- <label><span class="shop-label">CANT.</span><select class="card-qty"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></div>
- <button class="card-add" type="button">AÑADIR A LA BOLSA ↗</button></div>
- </article>`).join("");
+ <div class="shop-controls"><label><span class="shop-label">TALLA</span><select class="card-size"><option value="">Elegir</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></label><label><span class="shop-label">CANT.</span><select class="card-qty"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></div>
+ <button class="card-add" type="button">AÑADIR A LA BOLSA ↗</button></div></article>`).join("");
+document.querySelectorAll(".shop-card").forEach(card=>{
+ let chosenColor=catalog[Number(card.dataset.product)].colors[0];
+ card.querySelectorAll(".swatch").forEach(btn=>btn.onclick=()=>{
+  chosenColor=btn.dataset.color;
+  card.querySelectorAll(".swatch").forEach(x=>x.classList.toggle("active",x===btn));
+  card.querySelector(".selected-color").textContent=chosenColor;
+  const img=card.querySelector(".shop-image img");
+  img.style.filter=chosenColor==="Negro"?"brightness(.72) contrast(1.15)":chosenColor==="Gris"?"grayscale(.7)":"none";
+ });
+ card.querySelector(".card-add").onclick=()=>{
+  const p=catalog[Number(card.dataset.product)],size=card.querySelector(".card-size").value;
+  if(!size){card.querySelector(".card-size").focus();return}
+  const qty=Number(card.querySelector(".card-qty").value),item={name:p.name,price:p.price,color:chosenColor,size,quantity:qty};
+  const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
+  if(existing)existing.quantity+=qty;else cart.push(item);
+  render();open();
+ };
+});;
 document.querySelectorAll(".shop-card").forEach(card=>{
  let chosenColor=catalog[Number(card.dataset.product)].colors[0];
  card.querySelectorAll(".swatch").forEach(btn=>btn.onclick=()=>{
