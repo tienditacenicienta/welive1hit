@@ -697,3 +697,19 @@
  .custom-order-description{font-size:13px}
  .custom-order-cta{width:100%;min-height:54px}
 }
+
+/* Refined custom-order message: shorter headline, stronger supporting copy */
+.custom-order{align-items:center}
+.custom-order-copy{max-width:900px}
+.custom-order-description{
+ max-width:790px;
+ color:#292929;
+ font-size:clamp(18px,1.65vw,24px);
+ line-height:1.45;
+ font-weight:500;
+ letter-spacing:-.025em;
+}
+@media(max-width:700px){
+ .custom-order{align-items:stretch}
+ .custom-order-description{font-size:17px;line-height:1.5}
+}
