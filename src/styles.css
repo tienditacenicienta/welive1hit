@@ -582,3 +582,9 @@
  .lifestyle-film-foot span{font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){.film-tile,.film-tile img{animation:none}}
+
+/* PLAY IT YOUR WAY opens the same shopping bag drawer */
+.lifestyle-cart-trigger{appearance:none;border:0;background:transparent;padding:0;color:#aaa;font:inherit;font-size:9px;font-weight:800;letter-spacing:.14em;cursor:pointer;text-align:right;transition:color .2s ease}
+.lifestyle-cart-trigger:hover,.lifestyle-cart-trigger:focus-visible{color:#fff}
+.lifestyle-cart-trigger:focus-visible{outline:1px solid #fff;outline-offset:6px}
+@media(max-width:700px){.lifestyle-cart-trigger{font-size:8px}}
