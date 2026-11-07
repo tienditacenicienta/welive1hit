@@ -453,3 +453,22 @@
 @media(prefers-reduced-motion:reduce){
  .manifesto-changing.manifesto-grand{animation:none}
 }
+
+/* Manifesto timing and masked left-to-right finale */
+.manifesto-mask{display:inline-block;overflow:hidden;vertical-align:baseline}
+.manifesto-changing{will-change:opacity,transform,clip-path}
+.manifesto-changing.is-changing{opacity:0;transform:translateY(0);transition:opacity .65s ease}
+.manifesto-changing.manifesto-wipe{
+ opacity:1;
+ clip-path:inset(0 0 0 0);
+ animation:manifestoMaskReveal 1.65s cubic-bezier(.77,0,.18,1) both;
+}
+@keyframes manifestoMaskReveal{
+ from{clip-path:inset(0 100% 0 0);transform:translateX(-.12em)}
+ to{clip-path:inset(0 0 0 0);transform:translateX(0)}
+}
+.manifesto-final .manifesto-mask{overflow:hidden}
+@media(prefers-reduced-motion:reduce){
+ .manifesto-changing.manifesto-wipe{animation:none;clip-path:none}
+ .manifesto-changing.is-changing{transition:none}
+}
