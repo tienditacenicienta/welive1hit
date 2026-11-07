@@ -646,3 +646,15 @@
 .claim-form button{background:#080808;color:#fff;border:0;padding:16px;font-size:11px;font-weight:900;letter-spacing:.12em}
 .claim-form button:disabled{opacity:.35;cursor:not-allowed}
 @media(max-width:650px){.legal-top{padding:22px 5%}.legal-wrap{padding:55px 5% 80px}.claim-form{grid-template-columns:1fr}.claim-full{grid-column:auto}.legal-section h2{font-size:20px}}
+
+/* Social marks aligned with the ONE HIT closing statement */
+.about h2{display:flex;align-items:center;flex-wrap:nowrap;gap:.14em}
+.about-socials{display:inline-flex;align-items:center;gap:.12em;flex:0 0 auto}
+.about-social-icon{width:.58em;height:.58em;border-radius:50%;background:#050505;display:grid;place-items:center}
+.about-social-icon svg{width:57%;height:57%;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.about-social-icon:nth-child(2) svg,.about-social-icon:nth-child(3) svg{fill:#fff;stroke:none}
+.about-social-icon .social-dot{fill:#fff;stroke:none}
+@media(max-width:700px){
+ .about h2{flex-wrap:wrap;row-gap:.18em}
+ .about-socials{gap:.12em}
+}
