@@ -113,7 +113,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* ONE HIT manifesto: sequential transitions, no overlapping text */
+/* ONE HIT manifesto: one complete phrase cycle, then the signature finale */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  const fixed=document.querySelector(".manifesto-fixed");
@@ -129,27 +129,26 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   phrase.classList.remove("is-changing");
   await wait(2800);
  };
+ const showFinale=async()=>{
+  phrase.classList.add("is-changing");
+  await wait(650);
+  fixed.classList.add("is-hidden");
+  line.classList.add("manifesto-final");
+  phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
+  phrase.classList.remove("is-changing");
+  void phrase.offsetWidth;
+  phrase.classList.add("manifesto-wipe");
+  await wait(4200);
+  phrase.classList.remove("manifesto-wipe");
+  phrase.classList.add("is-changing");
+  await wait(650);
+  line.classList.remove("manifesto-final");
+  fixed.classList.remove("is-hidden");
+ };
  const run=async()=>{
   while(true){
-   for(let i=0;i<phrases.length;i++) await showPhrase(phrases[i]);
-   phrase.classList.add("is-changing");
-   await wait(650);
-   fixed.classList.add("is-hidden");
-   line.classList.add("manifesto-final");
-   phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
-   phrase.classList.remove("is-changing");
-   void phrase.offsetWidth;
-   phrase.classList.add("manifesto-wipe");
-   await wait(4200);
-   phrase.classList.remove("manifesto-wipe");
-   phrase.classList.add("is-changing");
-   await wait(650);
-   line.classList.remove("manifesto-final");
-   fixed.classList.remove("is-hidden");
-   phrase.textContent=phrases[0];
-   phrase.classList.remove("is-changing");
-   await wait(2800);
-   for(let i=1;i<phrases.length;i++) await showPhrase(phrases[i]);
+   for(const text of phrases) await showPhrase(text);
+   await showFinale();
   }
  };
  run();
