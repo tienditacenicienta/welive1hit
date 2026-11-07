@@ -113,25 +113,43 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  };
 });updateSelection();show(0);render();
 
-/* ONE HIT manifesto: final phrase closes without the fixed opening */
+/* ONE HIT manifesto: premium finale, then repeat forever */
 (()=>{
  const phrase=document.getElementById("manifesto-changing");
  const fixed=document.querySelector(".manifesto-fixed");
  const line=document.querySelector(".manifesto-line");
  if(!phrase||!fixed||!line)return;
- const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino.","Encontré ONE HIT."];
+ const phrases=["toqué fondo.","fallé mil veces.","voy a mi ritmo.","pude, puedo y podré.","encontré un camino."];
  let index=0;
- const timer=window.setInterval(()=>{
+ const pause=ms=>new Promise(resolve=>window.setTimeout(resolve,ms));
+ const transition=async()=>{
+  phrase.classList.remove("manifesto-grand");
   phrase.classList.add("is-changing");
-  window.setTimeout(()=>{
-   index++;
+  await pause(420);
+  index++;
+  if(index<phrases.length){
    phrase.textContent=phrases[index];
    phrase.classList.remove("is-changing");
-   if(index===phrases.length-1){
-    fixed.classList.add("is-hidden");
-    line.classList.add("manifesto-final");
-    window.clearInterval(timer);
-   }
-  },420);
- },2800);
+   await pause(2380);
+   return transition();
+  }
+  fixed.classList.add("is-hidden");
+  line.classList.add("manifesto-final");
+  phrase.textContent="ENCONTRÉ ONE HIT.";
+  phrase.classList.remove("is-changing");
+  void phrase.offsetWidth;
+  phrase.classList.add("manifesto-grand");
+  await pause(3600);
+  phrase.classList.remove("manifesto-grand");
+  line.classList.remove("manifesto-final");
+  fixed.classList.remove("is-hidden");
+  phrase.classList.add("is-changing");
+  await pause(420);
+  index=0;
+  phrase.textContent=phrases[0];
+  phrase.classList.remove("is-changing");
+  await pause(2380);
+  return transition();
+ };
+ transition();
 })();
