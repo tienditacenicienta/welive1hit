@@ -136,7 +136,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
    await wait(650);
    fixed.classList.add("is-hidden");
    line.classList.add("manifesto-final");
-   phrase.textContent="ENCONTRÉ ONE HIT.";
+   phrase.innerHTML='<span class="final-regular">Encontré</span> <strong class="final-bold">ONE HIT.</strong>';
    phrase.classList.remove("is-changing");
    void phrase.offsetWidth;
    phrase.classList.add("manifesto-wipe");
