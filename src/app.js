@@ -112,3 +112,19 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   render();open();
  };
 });updateSelection();show(0);render();
+
+/* Animated ONE HIT manifesto — only the second phrase changes */
+(()=>{
+ const phrase=document.getElementById("manifesto-changing");
+ if(!phrase)return;
+ const phrases=["toqué fondo.","fallé una vez.","encontré un camino.","estoy en ONE HIT."];
+ let index=0;
+ window.setInterval(()=>{
+  phrase.classList.add("is-changing");
+  window.setTimeout(()=>{
+   index=(index+1)%phrases.length;
+   phrase.textContent=phrases[index];
+   phrase.classList.remove("is-changing");
+  },420);
+ },2800);
+})();
