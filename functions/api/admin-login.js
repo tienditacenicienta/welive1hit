@@ -6,5 +6,5 @@ export async function onRequestPost({request,env}){
  const supplied=String(body.password||"");
  if(supplied.length<1||supplied!==env.ADMIN_PASSWORD)return json({error:"Contraseña incorrecta."},401);
  const expires=Date.now()+8*60*60*1000,token=String(expires),signature=await sign(token,env.ADMIN_PASSWORD);
- return new Response(JSON.stringify({ok:true}),{headers:{"Content-Type":"application/json","Cache-Control":"no-store","Set-Cookie":`onehit_admin=${token}.${signature}; Path=/api/admin; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`}});
+ return new Response(JSON.stringify({ok:true}),{headers:{"Content-Type":"application/json","Cache-Control":"no-store","Set-Cookie":`onehit_admin=${token}.${signature}; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`}});
 }
