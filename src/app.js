@@ -88,13 +88,13 @@ const catalog=[
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 const galleryImages=[
- "/public/models/model-white.webp",
- "/public/models/model-black.webp",
- "/public/models/model-alt.webp",
- "/public/models/model-graphic.webp"
+ "/public/models/mockup-front.svg",
+ "/public/models/mockup-back.svg",
+ "/public/models/mockup-print-detail.svg",
+ "/public/models/mockup-fabric-detail.svg"
 ];
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
- <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="/public/models/model-white.webp" alt="${p.name}" loading="lazy"></div>
+ <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="/public/models/mockup-front.svg" alt="${p.name} — mockup referencial" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
