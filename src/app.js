@@ -256,8 +256,9 @@ updateSelection();show(0);render();
 })();
 
 
-/* ONE HIT: verify returned Mercado Pago orders against the server-side order ledger */
-(async()=>{
+/* ONE HIT: verify payment, show the shipping-registration step, then redirect to LATAM5S. */
+(()=>{
+ const LATAM5S_FORM_URL="https://www.latam5s.com/";
  const params=new URLSearchParams(window.location.search);
  const result=params.get("mp_return"),reference=params.get("reference");
  if(!result||!reference)return;
@@ -269,24 +270,39 @@ updateSelection();show(0);render();
  const title=banner.querySelector(".onehit-order-result-title"),copy=banner.querySelector(".onehit-order-result-copy"),detail=banner.querySelector(".onehit-order-result-detail");
  if(result==="failure"){title.textContent="No se completó el pago.";copy.textContent="Puedes volver a la tienda e intentarlo nuevamente.";return;}
  if(result==="pending"){title.textContent="Tu pago está pendiente.";copy.textContent="Te mostraremos el estado cuando Mercado Pago lo confirme.";return;}
- for(let attempt=0;attempt<10;attempt++){
-  try{
-   const response=await fetch("/api/order-status?reference="+encodeURIComponent(reference),{cache:"no-store"});
-   const order=await response.json();
-   if(response.ok&&order.status==="paid"){
-    title.textContent="¡Pago confirmado. Tu pedido está registrado!";
-    copy.textContent="Gracias por elegir ONE HIT. Guardamos tu compra correctamente.";
-    detail.textContent=order.items.map(item=>item.name+" · "+item.color+" · Talla "+item.size+" · Cant. "+item.quantity).join(" / ")+(order.shipping?" · "+order.shipping.method+" S/ "+Number(order.shipping.cost).toFixed(2):"")+" — Total S/ "+Number(order.total).toFixed(2);
-    return;
-   }
-   if(response.ok&&["cancelled","rejected","error"].includes(order.status)){
-    title.textContent="El pago no fue aprobado.";
-    copy.textContent="Tu pedido no figura como pagado. Puedes volver a intentarlo desde la tienda.";
-    return;
-   }
-  }catch(error){/* Retry briefly while the webhook reaches the database. */}
-  await new Promise(resolve=>setTimeout(resolve,1500));
- }
- title.textContent="Estamos esperando la confirmación.";
- copy.textContent="Mercado Pago aún no ha actualizado el pedido. No vuelvas a pagar; revisaremos el estado en unos instantes.";
+ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+ (async()=>{
+  let order=null;
+  for(let attempt=0;attempt<10;attempt++){
+   try{
+    const response=await fetch("/api/order-status?reference="+encodeURIComponent(reference),{cache:"no-store"});
+    const data=await response.json();
+    if(response.ok&&data.status==="paid"){order=data;break;}
+    if(response.ok&&["cancelled","rejected","error"].includes(data.status)){
+     title.textContent="El pago no fue aprobado.";
+     copy.textContent="Tu pedido no figura como pagado. Puedes volver a intentarlo desde la tienda.";
+     return;
+    }
+   }catch(error){}
+   await wait(1500);
+  }
+  if(!order){
+   title.textContent="Estamos esperando la confirmación.";
+   copy.textContent="Mercado Pago aún no ha actualizado el pedido. No vuelvas a pagar; revisaremos el estado en unos instantes.";
+   return;
+  }
+  const shortId="1HIT-"+reference.replace(/^1HIT-/,"").slice(0,8).toUpperCase();
+  title.textContent="¡Pago confirmado!";
+  copy.textContent="Tu pedido está registrado correctamente.";
+  const productRows=order.items.map(item=>'<div class="onehit-confirm-product"><span>'+item.name+'<small>'+item.color+' · Talla '+item.size+'</small></span><b>× '+item.quantity+'</b></div>').join("");
+  const shipping=order.shipping?order.shipping.method+" · S/ "+Number(order.shipping.cost).toFixed(2):"Por registrar";
+  detail.innerHTML='<div class="onehit-confirm-id">Pedido #'+shortId+' · S/ '+Number(order.total).toFixed(2)+'</div><div class="onehit-confirm-card"><span class="onehit-step">PASO 1 COMPLETADO</span><h2>Tu compra está casi lista.</h2><p>Para preparar tu pedido necesitamos que registres tus datos de envío.</p><div class="onehit-confirm-products">'+productRows+'</div><div class="onehit-confirm-shipping">Método seleccionado: <b>'+shipping+'</b></div><div class="onehit-next-step"><strong>Solo falta registrar tu envío</strong><p>Completa el formulario para indicarnos tus datos personales, dirección y método de entrega.</p></div><a class="onehit-register-link" href="'+LATAM5S_FORM_URL+'" id="onehit-register-link">REGISTRAR MI ENVÍO ↗</a><p class="onehit-countdown">Serás redirigido automáticamente en <b id="onehit-countdown">5</b> segundos.</p></div>';
+  const link=banner.querySelector("#onehit-register-link"),count=banner.querySelector("#onehit-countdown");
+  let seconds=5;
+  const interval=setInterval(()=>{
+   seconds--;if(count)count.textContent=String(seconds);
+   if(seconds<=0){clearInterval(interval);window.location.assign(LATAM5S_FORM_URL);}
+  },1000);
+  link.addEventListener("click",()=>clearInterval(interval));
+ })();
 })();
