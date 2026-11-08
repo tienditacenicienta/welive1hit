@@ -242,3 +242,39 @@ updateSelection();show(0);render();
  };
  run();
 })();
+
+
+/* ONE HIT: verify returned Mercado Pago orders against the server-side order ledger */
+(async()=>{
+ const params=new URLSearchParams(window.location.search);
+ const result=params.get("mp_return"),reference=params.get("reference");
+ if(!result||!reference)return;
+ const banner=document.createElement("section");
+ banner.id="onehit-order-result";
+ banner.setAttribute("role","status");
+ banner.innerHTML='<div class="onehit-order-result-inner"><span class="onehit-order-result-kicker">ONE HIT / PEDIDO</span><strong class="onehit-order-result-title">Estamos verificando tu pago…</strong><p class="onehit-order-result-copy">Un momento, estamos consultando la confirmación de Mercado Pago.</p><div class="onehit-order-result-detail"></div></div>';
+ document.body.prepend(banner);
+ const title=banner.querySelector(".onehit-order-result-title"),copy=banner.querySelector(".onehit-order-result-copy"),detail=banner.querySelector(".onehit-order-result-detail");
+ if(result==="failure"){title.textContent="No se completó el pago.";copy.textContent="Puedes volver a la tienda e intentarlo nuevamente.";return;}
+ if(result==="pending"){title.textContent="Tu pago está pendiente.";copy.textContent="Te mostraremos el estado cuando Mercado Pago lo confirme.";return;}
+ for(let attempt=0;attempt<10;attempt++){
+  try{
+   const response=await fetch("/api/order-status?reference="+encodeURIComponent(reference),{cache:"no-store"});
+   const order=await response.json();
+   if(response.ok&&order.status==="paid"){
+    title.textContent="¡Pago confirmado. Tu pedido está registrado!";
+    copy.textContent="Gracias por elegir ONE HIT. Guardamos tu compra correctamente.";
+    detail.textContent=order.items.map(item=>item.name+" · "+item.color+" · Talla "+item.size+" · Cant. "+item.quantity).join(" / ")+" — Total S/ "+Number(order.total).toFixed(2);
+    return;
+   }
+   if(response.ok&&["cancelled","rejected","error"].includes(order.status)){
+    title.textContent="El pago no fue aprobado.";
+    copy.textContent="Tu pedido no figura como pagado. Puedes volver a intentarlo desde la tienda.";
+    return;
+   }
+  }catch(error){/* Retry briefly while the webhook reaches the database. */}
+  await new Promise(resolve=>setTimeout(resolve,1500));
+ }
+ title.textContent="Estamos esperando la confirmación.";
+ copy.textContent="Mercado Pago aún no ha actualizado el pedido. No vuelvas a pagar; revisaremos el estado en unos instantes.";
+})();
