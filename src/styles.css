@@ -835,3 +835,24 @@ body.modal-open{overflow:hidden}
   padding:0;
  }
 }
+
+/* Mobile hero: prevent sticky touch-hover from looking selected after deselection */
+@media(max-width:700px){
+  #home .size-options button{
+    background:#fff !important;
+    color:#111 !important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  #home .size-options button.selected{
+    background:#080808 !important;
+    color:#fff !important;
+  }
+  #home .size-options button:hover:not(.selected){
+    background:#fff !important;
+    color:#111 !important;
+  }
+
+  /* Bring size and quantity selectors closer to product price */
+  #home .product-meta{bottom:20% !important}
+  #home .purchase-options{bottom:12.5% !important}
+}
