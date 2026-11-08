@@ -276,7 +276,7 @@ updateSelection();show(0);render();
    if(response.ok&&order.status==="paid"){
     title.textContent="¡Pago confirmado. Tu pedido está registrado!";
     copy.textContent="Gracias por elegir ONE HIT. Guardamos tu compra correctamente.";
-    detail.textContent=order.items.map(item=>item.name+" · "+item.color+" · Talla "+item.size+" · Cant. "+item.quantity).join(" / ")+" — Total S/ "+Number(order.total).toFixed(2);
+    detail.textContent=order.items.map(item=>item.name+" · "+item.color+" · Talla "+item.size+" · Cant. "+item.quantity).join(" / ")+(order.shipping?" · "+order.shipping.method+" S/ "+Number(order.shipping.cost).toFixed(2):"")+" — Total S/ "+Number(order.total).toFixed(2);
     return;
    }
    if(response.ok&&["cancelled","rejected","error"].includes(order.status)){
