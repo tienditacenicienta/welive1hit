@@ -30,8 +30,8 @@ export async function onRequestPost({ request, env }) {
   const origin = new URL(request.url).origin;
   const reference = `1HIT-${crypto.randomUUID()}`;
   try {
-    await env.DB.prepare("INSERT INTO orders (id, status, total_amount, items_json) VALUES (?, 'pending', ?, ?)")
-      .bind(reference, total, JSON.stringify(items)).run();
+    await env.DB.prepare("INSERT INTO orders (id, external_reference, status, amount, currency, items) VALUES (?, ?, 'pending', ?, 'PEN', ?)")
+      .bind(reference, reference, total, JSON.stringify(items)).run();
   } catch (error) {
     console.error("Could not save pending ONE HIT order", error);
     return json({ error: "No pudimos guardar tu pedido. Inténtalo nuevamente." }, 503);
@@ -66,6 +66,6 @@ export async function onRequestPost({ request, env }) {
       result.details?.map?.(entry => entry.description || entry.message || entry.code).filter(Boolean).join("; ")].filter(Boolean).join(" — ");
     return json({ error: providerMessage ? `Mercado Pago (${mpResponse.status}): ${providerMessage}` : `Mercado Pago no pudo crear el pago (HTTP ${mpResponse.status}). Revisa las credenciales y vuelve a intentarlo.` }, 502);
   }
-  await env.DB.prepare("UPDATE orders SET mp_order_id=?, updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(String(result.id), reference).run();
+  await env.DB.prepare("UPDATE orders SET updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(reference).run();
   return json({ checkout_url: result.checkout_url, order_id: result.id, external_reference: reference });
 }
