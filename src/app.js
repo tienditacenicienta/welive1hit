@@ -5,7 +5,7 @@ const products=[
  {name:"Polo gráfico 02 / Arena",price:49,color:"Arena"},
  {name:"Hoodie ONE HIT / Negro",price:89,color:"Negro"}
 ];
-let current=0,cart=[],timer,selectedSize=null,quantity=1;
+let current=0,cart=[],timer,selectedSize=null,quantity=1,shippingMethod="",customerPhone="";
 const $=s=>document.querySelector(s);
 
 function show(i){
@@ -50,9 +50,13 @@ $("#qty-plus").onclick=()=>{quantity=Math.min(20,quantity+1);updateSelection()};
 function render(){
  const units=cart.reduce((sum,p)=>sum+p.quantity,0);
  const subtotal=cart.reduce((sum,p)=>sum+p.price*p.quantity,0);
+ const shippingCost=shippingMethod==="delivery"?20:shippingMethod==="shalom"?12:0;
  $("#bag-count").textContent=units;
  $("#subtotal").textContent=`S/ ${subtotal.toFixed(2)}`;
- $("#checkout").disabled=!cart.length;
+ $("#shipping-total").textContent=shippingMethod?`S/ ${shippingCost.toFixed(2)}`:"—";
+ $("#grand-total").textContent=`S/ ${(subtotal+shippingCost).toFixed(2)}`;
+ $("#shipping-panel").hidden=!cart.length;
+ $("#checkout").disabled=!cart.length||!shippingMethod||!/^9\\d{8}$/.test(customerPhone);
  $("#cart-items").innerHTML=cart.length?cart.map((p,i)=>
   `<div class="cart-line">
     <span><b>${p.name}</b><br><small>${p.color||"Blanco"} · Talla ${p.size} · Cant. ${p.quantity}</small></span>
@@ -76,8 +80,16 @@ $("#buy").onclick=()=>{
  selectedSize=null;quantity=1;updateSelection();
  open();
 };
+$("#customer-phone").addEventListener("input",event=>{
+ customerPhone=event.target.value.replace(/\\D/g,"").slice(0,9);
+ event.target.value=customerPhone;
+ render();
+});
+document.querySelectorAll('input[name="shipping"]').forEach(input=>input.addEventListener("change",()=>{
+ shippingMethod=input.value;render();
+}));
 $("#checkout").onclick=async()=>{
- if(!cart.length)return;
+ if(!cart.length||!shippingMethod||!/^9\\d{8}$/.test(customerPhone))return;
  const button=$("#checkout");
  const originalText=button.textContent;
  button.disabled=true;
@@ -86,7 +98,7 @@ $("#checkout").onclick=async()=>{
   const response=await fetch("/api/create-order",{
    method:"POST",
    headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({items:cart.map(({name,color,size,quantity})=>({name,color,size,quantity}))})
+   body:JSON.stringify({items:cart.map(({name,color,size,quantity})=>({name,color,size,quantity})),phone:customerPhone,shipping_method:shippingMethod})
   });
   const data=await response.json();
   if(!response.ok||!data.checkout_url)throw new Error(data.error||"No pudimos iniciar el pago.");
