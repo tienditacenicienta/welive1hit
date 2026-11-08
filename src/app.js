@@ -56,7 +56,7 @@ function render(){
  $("#shipping-total").textContent=shippingMethod?`S/ ${shippingCost.toFixed(2)}`:"—";
  $("#grand-total").textContent=`S/ ${(subtotal+shippingCost).toFixed(2)}`;
  $("#shipping-panel").hidden=!cart.length;
- $("#checkout").disabled=!cart.length||!shippingMethod||!/^9\\d{8}$/.test(customerPhone);
+ $("#checkout").disabled=!cart.length||!shippingMethod||!/^9\d{8}$/.test(customerPhone);
  $("#cart-items").innerHTML=cart.length?cart.map((p,i)=>
   `<div class="cart-line">
     <span><b>${p.name}</b><br><small>${p.color||"Blanco"} · Talla ${p.size} · Cant. ${p.quantity}</small></span>
@@ -89,7 +89,7 @@ document.querySelectorAll('input[name="shipping"]').forEach(input=>input.addEven
  shippingMethod=input.value;render();
 }));
 $("#checkout").onclick=async()=>{
- if(!cart.length||!shippingMethod||!/^9\\d{8}$/.test(customerPhone))return;
+ if(!cart.length||!shippingMethod||!/^9\d{8}$/.test(customerPhone))return;
  const button=$("#checkout");
  const originalText=button.textContent;
  button.disabled=true;
