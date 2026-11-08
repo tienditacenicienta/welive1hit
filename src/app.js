@@ -1,9 +1,9 @@
 const products=[
- {name:"Polo gráfico 01 / Blanco",price:49},
- {name:"Polo básico / Negro",price:45},
- {name:"Polo gráfico 02 / Blanco",price:49},
- {name:"Polo gráfico 02 / Arena",price:49},
- {name:"Hoodie ONE HIT / Negro",price:89}
+ {name:"Polo gráfico 01 / Blanco",price:49,color:"Blanco"},
+ {name:"Polo básico / Negro",price:45,color:"Negro"},
+ {name:"Polo gráfico 02 / Blanco",price:49,color:"Blanco"},
+ {name:"Polo gráfico 02 / Arena",price:49,color:"Arena"},
+ {name:"Hoodie ONE HIT / Negro",price:89,color:"Negro"}
 ];
 let current=0,cart=[],timer,selectedSize=null,quantity=1;
 const $=s=>document.querySelector(s);
