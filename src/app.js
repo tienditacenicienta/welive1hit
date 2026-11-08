@@ -76,7 +76,27 @@ $("#buy").onclick=()=>{
  selectedSize=null;quantity=1;updateSelection();
  open();
 };
-$("#checkout").onclick=()=>alert("Checkout de demostración. Mercado Pago aún no está conectado.");
+$("#checkout").onclick=async()=>{
+ if(!cart.length)return;
+ const button=$("#checkout");
+ const originalText=button.textContent;
+ button.disabled=true;
+ button.textContent="CONECTANDO CON MERCADO PAGO…";
+ try{
+  const response=await fetch("/api/create-order",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({items:cart.map(({name,color,size,quantity})=>({name,color,size,quantity}))})
+  });
+  const data=await response.json();
+  if(!response.ok||!data.checkout_url)throw new Error(data.error||"No pudimos iniciar el pago.");
+  window.location.assign(data.checkout_url);
+ }catch(error){
+  alert(error.message||"Ocurrió un error al iniciar el pago. Inténtalo nuevamente.");
+  button.disabled=false;
+  button.textContent=originalText;
+ }
+};
 
 const catalog=[
  {name:"PROV. 17:22",price:49,colors:["Blanco","Negro","Gris"]},
