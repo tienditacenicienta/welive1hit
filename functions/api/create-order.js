@@ -65,7 +65,7 @@ export async function onRequestPost({ request, env }) {
       title: item.name,
       description: `Color ${item.color} · Talla ${item.size}`,
       quantity,
-      unit_price: unitPrice
+      unit_price: unitPrice.toFixed(2)
     });
   }
 
@@ -111,8 +111,23 @@ export async function onRequestPost({ request, env }) {
 
   const result = await mpResponse.json().catch(() => ({}));
   if (!mpResponse.ok || !result.checkout_url) {
-    console.error("Mercado Pago order error", mpResponse.status, result);
-    return json({ error: "Mercado Pago no pudo crear el pago. Revisa tus datos e inténtalo nuevamente." }, 502);
+    // Keep the provider diagnostics useful without ever returning credentials or request headers.
+    console.error("Mercado Pago order error", mpResponse.status, {
+      message: result.message,
+      error: result.error,
+      cause: result.cause,
+      details: result.details
+    });
+    const providerMessage = [
+      result.message,
+      result.cause?.map?.(entry => entry.description || entry.code).filter(Boolean).join("; "),
+      result.details?.map?.(entry => entry.description || entry.message || entry.code).filter(Boolean).join("; ")
+    ].filter(Boolean).join(" — ");
+    return json({
+      error: providerMessage
+        ? `Mercado Pago (${mpResponse.status}): ${providerMessage}`
+        : `Mercado Pago no pudo crear el pago (HTTP ${mpResponse.status}). Revisa las credenciales y vuelve a intentarlo.`
+    }, 502);
   }
 
   return json({
