@@ -73,5 +73,29 @@
   <a href="/informacion-legal.html#envios">Envíos y entregas</a>
  </nav>
 </footer>
+<div class="product-modal-backdrop" id="product-modal-backdrop"></div>
+<section class="product-modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="detail-name" aria-hidden="true">
+ <button class="product-modal-close" id="detail-close" type="button" aria-label="Cerrar">×</button>
+ <div class="detail-gallery">
+  <div class="detail-main-image"><img id="detail-main-image" src="/public/models/model-white.webp" alt=""></div>
+  <div class="detail-thumbnails" id="detail-thumbnails"></div>
+ </div>
+ <div class="detail-info">
+  <p class="detail-kicker">ONE HIT / PRODUCTO</p>
+  <h2 id="detail-name"></h2>
+  <p class="detail-price" id="detail-price"></p>
+  <div class="detail-option">
+   <span class="option-label">COLOR</span><div class="detail-swatches" id="detail-swatches"></div><span id="detail-color-name"></span>
+  </div>
+  <div class="detail-option">
+   <span class="option-label">TALLA</span><div class="detail-sizes" id="detail-sizes"></div>
+  </div>
+  <div class="detail-option">
+   <span class="option-label">CANTIDAD</span><div class="quantity-control"><button id="detail-minus" type="button" aria-label="Disminuir">−</button><output id="detail-quantity">1</output><button id="detail-plus" type="button" aria-label="Aumentar">+</button></div>
+  </div>
+  <button class="detail-add" id="detail-add" type="button">AÑADIR A LA BOLSA ↗</button>
+  <p class="detail-note">Selecciona tu color, talla y cantidad antes de añadir a tu bolsa.</p>
+ </div>
+</section>
 <div class="drawer-backdrop" id="backdrop"></div><aside class="drawer" id="drawer"><div class="drawer-head"><b>TU BOLSA</b><button id="close">×</button></div><div id="cart-items" class="cart-items">Tu bolsa está vacía.</div><div class="drawer-foot"><b>SUBTOTAL <span id="subtotal">S/ 0.00</span></b><button id="checkout" disabled>CONTINUAR ↗</button><small>Checkout de demostración. Mercado Pago aún no está conectado.</small></div></aside>
 <script src="/src/app.js?v=shop-001"></script></body></html>
