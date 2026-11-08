@@ -30,7 +30,10 @@ export async function onRequestPost({ request, env }) {
     items.push({ name: item.name, color: item.color, size: item.size, quantity, unit_price: unitPrice,
       title: item.name, description: `Color ${item.color} · Talla ${item.size}` });
   }
-  const productsTotal = total;\n  total += shipping.cost;\n  if (!Number.isFinite(total) || total <= 0 || total > 10000) return json({ error: "El total del pedido no es válido." }, 400);\n  const orderItems = [...items, { name: shipping.label, color: "—", size: "—", quantity: 1, unit_price: shipping.cost, is_shipping: true }, { _meta: { shipping_label: shipping.label, shipping_cost: shipping.cost, products_total: productsTotal, phone } }];
+  const productsTotal = total;
+  total += shipping.cost;
+  if (!Number.isFinite(total) || total <= 0 || total > 10000) return json({ error: "El total del pedido no es válido." }, 400);
+  const orderItems = [...items, { name: shipping.label, color: "—", size: "—", quantity: 1, unit_price: shipping.cost, is_shipping: true }, { _meta: { shipping_label: shipping.label, shipping_cost: shipping.cost, products_total: productsTotal, phone } }];
   const origin = new URL(request.url).origin;
   const reference = `1HIT-${crypto.randomUUID()}`;
   try {
