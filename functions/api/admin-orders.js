@@ -11,7 +11,15 @@ async function authorized(request,env){
 function parse(order){
  let items=[];try{items=JSON.parse(order.items||"[]")}catch{}
  const meta=items.find(x=>x?._meta)?._meta||{},shipping=items.find(x=>x?.is_shipping);
- return {reference:order.id,short_id:"1HIT-"+String(order.id).replace(/^1HIT-/,"").slice(0,8).toUpperCase(),status:order.status,total:Number(order.amount),phone:meta.phone||"—",shipping_method:meta.shipping_label||shipping?.name||"—",shipping_cost:Number(meta.shipping_cost??shipping?.unit_price??0),products_total:Number(meta.products_total??0),items:items.filter(x=>x&&!x._meta&&!x.is_shipping).map(x=>({name:x.name||x.title||"Producto",color:x.color||"—",size:x.size||"—",quantity:Number(x.quantity)||1,unit_price:Number(x.unit_price)||0})),created_at:order.created_at,updated_at:order.updated_at};
+ const imageByName={
+  "Polo gráfico 01 / Blanco":"/public/models/model-white.webp",
+  "Polo básico / Negro":"/public/models/model-black.webp",
+  "Polo gráfico 02 / Blanco":"/public/models/model-alt.webp",
+  "Polo gráfico 02 / Arena":"/public/models/model-graphic.webp",
+  "Hoodie ONE HIT / Negro":"/public/models/model-hoodie.webp"
+ };
+ const image=imageByName[items.find(x=>x&&!x._meta&&!x.is_shipping)?.name]||"/public/models/mockup-front.svg";
+ return {image,reference:order.id,short_id:"1HIT-"+String(order.id).replace(/^1HIT-/,"").slice(0,8).toUpperCase(),status:order.status,total:Number(order.amount),phone:meta.phone||"—",shipping_method:meta.shipping_label||shipping?.name||"—",shipping_cost:Number(meta.shipping_cost??shipping?.unit_price??0),products_total:Number(meta.products_total??0),items:items.filter(x=>x&&!x._meta&&!x.is_shipping).map(x=>({name:x.name||x.title||"Producto",color:x.color||"—",size:x.size||"—",quantity:Number(x.quantity)||1,unit_price:Number(x.unit_price)||0})),created_at:order.created_at,updated_at:order.updated_at};
 }
 export async function onRequestGet({request,env}){
  if(!await authorized(request,env))return json({error:"No autorizado."},401);
