@@ -124,7 +124,7 @@ function openDetail(index,color=null){
  $("#detail-thumbnails").innerHTML=galleryImages.map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
  $("#detail-thumbnails").querySelectorAll("button").forEach(b=>b.onclick=()=>setDetailImage(Number(b.dataset.image)));
  $("#detail-swatches").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailColor=b.dataset.color;updateDetailOptions()});
- $("#detail-sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailSize=b.dataset.size;updateDetailOptions()});
+ $("#detail-sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailSize=detailSize===b.dataset.size?null:b.dataset.size;updateDetailOptions()});
  setDetailImage(0);updateDetailOptions();
  modal.classList.add("open");modalBackdrop.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
 }
@@ -148,7 +148,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  const image=card.querySelector(".shop-image"),name=card.querySelector(".shop-open-detail");
  image.onclick=openCardDetail;image.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCardDetail()}};
  name.onclick=openCardDetail;name.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCardDetail()}};
- sizeButtons.forEach(btn=>btn.onclick=()=>{chosenSize=btn.dataset.size;sizeButtons.forEach(x=>x.classList.toggle("selected",x===btn))});
+ sizeButtons.forEach(btn=>btn.onclick=()=>{chosenSize=chosenSize===btn.dataset.size?null:btn.dataset.size;sizeButtons.forEach(x=>x.classList.toggle("selected",x.dataset.size===chosenSize))});
  card.querySelector(".qty-minus").onclick=()=>{qty=Math.max(1,qty-1);quantityOut.textContent=qty};
  card.querySelector(".qty-plus").onclick=()=>{qty=Math.min(20,qty+1);quantityOut.textContent=qty};
  card.querySelectorAll(".swatch").forEach(btn=>btn.onclick=()=>{
