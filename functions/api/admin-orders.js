@@ -1,8 +1,8 @@
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"}});
 async function authorized(request,env){
  if(!env.ADMIN_PASSWORD)return false;
- const cookie=request.headers.get("Cookie")||"",match=cookie.match(/(?:^|;\\s*)onehit_admin=([^;]+)/);if(!match)return false;
- const [expires,provided]=match[1].split(".");if(!/^\\d+$/.test(expires)||Number(expires)<Date.now()||!provided)return false;
+ const cookie=request.headers.get("Cookie")||"",match=cookie.match(/(?:^|;\s*)onehit_admin=([^;]+)/);if(!match)return false;
+ const [expires,provided]=match[1].split(".");if(!/^\d+$/.test(expires)||Number(expires)<Date.now()||!provided)return false;
  const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(env.ADMIN_PASSWORD),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
  const bytes=new Uint8Array(await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(expires)));
  const expected=Array.from(bytes,b=>b.toString(16).padStart(2,"0")).join("");
