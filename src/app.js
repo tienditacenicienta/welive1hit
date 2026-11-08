@@ -81,7 +81,7 @@ $("#buy").onclick=()=>{
  open();
 };
 $("#customer-phone").addEventListener("input",event=>{
- customerPhone=event.target.value.replace(/\\D/g,"").slice(0,9);
+ customerPhone=event.target.value.replace(/\D/g,"").slice(0,9);
  event.target.value=customerPhone;
  render();
 });
