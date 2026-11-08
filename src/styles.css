@@ -856,3 +856,12 @@ body.modal-open{overflow:hidden}
   #home .product-meta{bottom:20% !important}
   #home .purchase-options{bottom:12.5% !important}
 }
+
+
+/* ONE HIT order confirmation returned from Mercado Pago */
+#onehit-order-result{position:relative;z-index:30;background:#111;color:#fff;padding:26px clamp(20px,5vw,72px);border-bottom:1px solid #333}
+.onehit-order-result-inner{max-width:1200px;margin:0 auto}
+.onehit-order-result-kicker{display:block;font-size:10px;letter-spacing:.18em;font-weight:700;margin-bottom:9px}
+.onehit-order-result-title{display:block;font-size:clamp(21px,3vw,34px);font-weight:900;line-height:1.05}
+.onehit-order-result-copy{font-size:13px;line-height:1.5;margin:9px 0 0;color:#d0d0d0}
+.onehit-order-result-detail{font-size:12px;line-height:1.5;margin-top:10px;color:#fff}
