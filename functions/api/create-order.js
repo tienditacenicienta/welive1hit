@@ -14,7 +14,7 @@ export async function onRequestPost({ request, env }) {
   try { body = await request.json(); } catch { return json({ error: "Solicitud inválida." }, 400); }
   if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 30) return json({ error: "La bolsa no contiene productos válidos." }, 400);
   const phone = String(body.phone || "").replace(/\\D/g, "");
-  if (!/^9\\d{8}$/.test(phone)) return json({ error: "Ingresa un celular peruano válido de 9 dígitos." }, 400);
+  if (!/^9\d{8}$/.test(phone)) return json({ error: "Ingresa un celular peruano válido de 9 dígitos." }, 400);
   const shipping = { delivery: { label: "Delivery (Sólo Lima)", cost: 20 }, shalom: { label: "Shalom (Lima y Provincia)", cost: 12 } }[body.shipping_method];
   if (!shipping) return json({ error: "Selecciona un método de envío válido." }, 400);
   const items = [];
