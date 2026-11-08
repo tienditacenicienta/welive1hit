@@ -865,3 +865,22 @@ body.modal-open{overflow:hidden}
 .onehit-order-result-title{display:block;font-size:clamp(21px,3vw,34px);font-weight:900;line-height:1.05}
 .onehit-order-result-copy{font-size:13px;line-height:1.5;margin:9px 0 0;color:#d0d0d0}
 .onehit-order-result-detail{font-size:12px;line-height:1.5;margin-top:10px;color:#fff}
+
+/* ONE HIT cart: shipping selection and customer phone before checkout */
+.shipping-panel{padding:22px 0 18px;border-top:1px solid #ddd}
+.shipping-panel[hidden]{display:none}
+.shipping-heading,.checkout-contact>label{display:block;font-size:9px;font-weight:900;letter-spacing:.14em;margin:0 0 13px}
+.shipping-option{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #e5e5e5;cursor:pointer}
+.shipping-option input{width:17px;height:17px;accent-color:#080808;flex:0 0 auto}
+.shipping-option span{display:flex;justify-content:space-between;align-items:center;gap:12px;flex:1;font-size:12px}
+.shipping-option small{font-size:12px;font-weight:800;white-space:nowrap}
+.shipping-note{font-size:10px;color:#777;margin:12px 0 20px}
+.checkout-contact{display:flex;flex-direction:column;gap:8px}
+.checkout-contact input{width:100%;height:46px;border:1px solid #bbb;border-radius:0;padding:0 13px;font:14px "DM Sans",Arial;background:#fff;outline:none}
+.checkout-contact input:focus{border-color:#080808}
+.checkout-contact>small{font-size:10px;line-height:1.5;color:#777}
+.cart-totals{display:grid;gap:10px;margin-bottom:18px}
+.cart-totals b{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.04em}
+.cart-totals .cart-grand-total{padding-top:12px;border-top:1px solid #ccc;font-size:12px}
+.drawer-foot{gap:0}
+@media(max-width:700px){.shipping-panel{padding:18px 0 14px}.shipping-option{padding:12px 0}}
