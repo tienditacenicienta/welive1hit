@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
   let body;
   try { body = await request.json(); } catch { return json({ error: "Solicitud inválida." }, 400); }
   if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 30) return json({ error: "La bolsa no contiene productos válidos." }, 400);
-  const phone = String(body.phone || "").replace(/\\D/g, "");
+  const phone = String(body.phone || "").replace(/\D/g, "");
   if (!/^9\d{8}$/.test(phone)) return json({ error: "Ingresa un celular peruano válido de 9 dígitos." }, 400);
   const shipping = { delivery: { label: "Delivery (Sólo Lima)", cost: 20 }, shalom: { label: "Shalom (Lima y Provincia)", cost: 12 } }[body.shipping_method];
   if (!shipping) return json({ error: "Selecciona un método de envío válido." }, 400);
@@ -30,12 +30,12 @@ export async function onRequestPost({ request, env }) {
     items.push({ name: item.name, color: item.color, size: item.size, quantity, unit_price: unitPrice,
       title: item.name, description: `Color ${item.color} · Talla ${item.size}` });
   }
-  if (!Number.isFinite(total) || total <= 0 || total > 10000) return json({ error: "El total del pedido no es válido." }, 400);
+  const productsTotal = total;\n  total += shipping.cost;\n  if (!Number.isFinite(total) || total <= 0 || total > 10000) return json({ error: "El total del pedido no es válido." }, 400);\n  const orderItems = [...items, { name: shipping.label, color: "—", size: "—", quantity: 1, unit_price: shipping.cost, is_shipping: true }, { _meta: { shipping_label: shipping.label, shipping_cost: shipping.cost, products_total: productsTotal, phone } }];
   const origin = new URL(request.url).origin;
   const reference = `1HIT-${crypto.randomUUID()}`;
   try {
     await env.DB.prepare("INSERT INTO orders (id, external_reference, status, amount, currency, items) VALUES (?, ?, 'pending', ?, 'PEN', ?)")
-      .bind(reference, reference, total, JSON.stringify(items)).run();
+      .bind(reference, reference, total, JSON.stringify(orderItems)).run();
   } catch (error) {
     console.error("Could not save pending ONE HIT order", error);
     return json({ error: "No pudimos guardar tu pedido. Inténtalo nuevamente." }, 503);
@@ -43,7 +43,7 @@ export async function onRequestPost({ request, env }) {
   const payload = {
     type: "online", processing_mode: "manual", capture_mode: "automatic_async",
     total_amount: total.toFixed(2), external_reference: reference, description: "Compra en ONE HIT",
-    items: items.filter(item => !item._meta).map(({ title, description, quantity, unit_price }) => ({ title, description, quantity, unit_price: unit_price.toFixed(2) })),
+    items: [...items.map(({ title, description, quantity, unit_price }) => ({ title, description, quantity, unit_price: unit_price.toFixed(2) })), { title: `Envío — ${shipping.label}`, description: "Envío de 1 a 2 días", quantity: 1, unit_price: shipping.cost.toFixed(2) }],
     config: { online: {
       success_url: `${origin}/?mp_return=success&reference=${encodeURIComponent(reference)}`,
       failure_url: `${origin}/?mp_return=failure&reference=${encodeURIComponent(reference)}`,
