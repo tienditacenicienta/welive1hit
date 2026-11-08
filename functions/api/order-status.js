@@ -3,8 +3,8 @@ export async function onRequestGet({request,env}){
  if(!env.DB)return json({error:"Orders database not configured."},503);
  const reference=new URL(request.url).searchParams.get("reference")||"";
  if(!/^1HIT-[0-9a-f-]{36}$/i.test(reference))return json({error:"Referencia inválida."},400);
- const order=await env.DB.prepare("SELECT id,status,total_amount,items_json,created_at FROM orders WHERE id=?").bind(reference).first();
+ const order=await env.DB.prepare("SELECT id,status,amount,items,created_at FROM orders WHERE id=?").bind(reference).first();
  if(!order)return json({error:"Pedido no encontrado."},404);
- let items=[];try{items=JSON.parse(order.items_json);}catch{}
- return json({reference:order.id,status:order.status,total:Number(order.total_amount),items:items.map(({name,color,size,quantity})=>({name,color,size,quantity})),created_at:order.created_at});
+ let items=[];try{items=JSON.parse(order.items);}catch{}
+ return json({reference:order.id,status:order.status,total:Number(order.amount),items:items.map(({name,color,size,quantity})=>({name,color,size,quantity})),created_at:order.created_at});
 }
