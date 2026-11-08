@@ -9,7 +9,9 @@ let current=0,cart=[],timer,selectedSize=null,quantity=1;
 const $=s=>document.querySelector(s);
 
 function show(i){
- current=(i+products.length)%products.length;
+ const next=(i+products.length)%products.length;
+ if(next!==current){selectedSize=null;updateSelection()}
+ current=next;
  $("#model-track").style.transform=`translateX(-${current*20}%)`;
  $("#slide-number").textContent=`${String(current+1).padStart(2,"0")} / 05`;
  $("#product-name").textContent=products[current].name.toUpperCase();
@@ -38,7 +40,7 @@ function updateSelection(){
 }
 document.querySelectorAll("#size-options button").forEach(b=>{
  b.addEventListener("click",()=>{
-  selectedSize=b.dataset.size;
+  selectedSize=selectedSize===b.dataset.size?null:b.dataset.size;
   updateSelection();
  });
 });
