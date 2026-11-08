@@ -23,17 +23,17 @@ export async function onRequestPost({request,env}){
  if(!response.ok)return json({error:"Mercado Pago order lookup failed."},502);
  const order=await response.json(),reference=order.external_reference;
  if(!reference||!String(reference).startsWith("1HIT-"))return json({received:true,ignored:true});
- const saved=await env.DB.prepare("SELECT id,total_amount,status FROM orders WHERE id=?").bind(reference).first();
+ const saved=await env.DB.prepare("SELECT id,amount,status FROM orders WHERE id=?").bind(reference).first();
  if(!saved){console.error("Order not found for webhook",reference);return json({error:"Order not found yet; retry notification."},503);}
  const total=Number(order.total_amount);
- if(!Number.isFinite(total)||Math.abs(total-Number(saved.total_amount))>0.009)return json({error:"Order amount mismatch."},409);
+ if(!Number.isFinite(total)||Math.abs(total-Number(saved.amount))>0.009)return json({error:"Order amount mismatch."},409);
  const payment=order.transactions?.payments?.[0]||{},paymentStatus=payment.status||order.status||"pending",paymentDetail=payment.status_detail||order.status_detail||"";
  const paid=order.status==="processed"&&order.status_detail==="accredited";
  let status=paid?"paid":"pending";
  if(["canceled","cancelled","expired"].includes(String(order.status).toLowerCase()))status="cancelled";
  if(String(paymentStatus).toLowerCase()==="rejected")status="rejected";
  if(saved.status==="paid"&&!paid)status="paid";
- await env.DB.prepare("UPDATE orders SET status=?,payment_id=?,payment_status=?,payment_detail=?,updated_at=CURRENT_TIMESTAMP WHERE id=?")
-  .bind(status,payment.id?String(payment.id):null,String(paymentStatus),String(paymentDetail),reference).run();
+ await env.DB.prepare("UPDATE orders SET status=?,payment_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=?")
+  .bind(status,payment.id?String(payment.id):null,reference).run();
  return json({received:true,order:reference,status});
 }
