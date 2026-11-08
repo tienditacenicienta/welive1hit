@@ -815,3 +815,23 @@ body.modal-open{overflow:hidden}
  /* Preserve a deliberate line break between the two parts of the invitation */
  .custom-order-desktop-break{display:block}
 }
+
+/* Rebalance mobile product controls: give the four size buttons their proper width */
+@media(max-width:700px){
+ .shop-controls{
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  column-gap:10px;
+ }
+ .shop-controls .size-options{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  justify-content:stretch;
+  gap:4px;
+ }
+ .shop-controls .size-options button{
+  width:100%;
+  min-width:0;
+  flex:initial;
+  padding:0;
+ }
+}
