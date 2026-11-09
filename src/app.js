@@ -258,7 +258,7 @@ updateSelection();show(0);render();
 
 /* ONE HIT: verify payment, show the shipping-registration step, then redirect to LATAM5S. */
 (()=>{
- const LATAM5S_FORM_URL="https://www.latam5s.com/";
+ const LATAM5S_FORM_URL="https://www.latam5s.com/form?merchant=u_ke3k4u5of";
  const params=new URLSearchParams(window.location.search);
  const result=params.get("mp_return"),reference=params.get("reference");
  if(!result||!reference)return;
