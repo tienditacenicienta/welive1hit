@@ -933,7 +933,7 @@ body.modal-open{overflow:hidden}
 @media(max-width:700px){.header .logo{width:104px!important}.header .logo img{width:104px!important}}
 
 
-/* HEADER LOGO — size by height so the complete artwork remains visible */
-.header .logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:160px!important;height:48px!important;min-height:48px!important;max-height:none!important;overflow:visible!important;line-height:0!important;padding:0!important}
-.header .logo img{display:block!important;width:auto!important;height:34px!important;max-width:160px!important;max-height:none!important;min-height:0!important;object-fit:contain!important;object-position:left center!important;overflow:visible!important;clip-path:none!important;transform:none!important}
-@media(max-width:700px){.header .logo{width:130px!important;height:42px!important;min-height:42px!important}.header .logo img{height:29px!important;max-width:130px!important}}
+/* HEADER LOGO — consistent natural sizing */
+.header .logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:150px!important;height:48px!important;min-height:48px!important;max-height:none!important;overflow:visible!important;line-height:0!important;padding:0!important}
+.header .logo img{display:block!important;width:150px!important;height:auto!important;max-width:150px!important;max-height:none!important;min-height:0!important;object-fit:contain!important;object-position:left center!important;overflow:visible!important;clip-path:none!important;transform:none!important}
+@media(max-width:700px){.header .logo{width:126px!important;height:42px!important;min-height:42px!important}.header .logo img{width:126px!important;max-width:126px!important}}
