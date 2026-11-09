@@ -909,3 +909,7 @@ body.modal-open{overflow:hidden}
 .onehit-register-link:hover{background:#333}
 .onehit-countdown{text-align:center;color:#777;font-size:13px;margin:16px 0 0!important}
 @media(max-width:700px){#onehit-order-result{padding:24px 5%}.onehit-confirm-card{padding:20px 16px}.onehit-register-link{font-size:14px;padding:18px 12px}}
+
+/* Final ONE HIT wordmark */
+.header .logo{display:block;width:clamp(118px,9vw,150px);line-height:0;letter-spacing:0}
+.header .logo img{display:block;width:100%;height:auto;object-fit:contain}
