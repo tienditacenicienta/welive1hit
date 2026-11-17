@@ -131,7 +131,8 @@ const catalog=[
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
  {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
  {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
- {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]}
+ {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]},
+ {name:"SAKURA JPN",price:55,colors:["Blanco"],images:["/public/models/sakura-jpn/sakura-jpn-front.png","/public/models/sakura-jpn/sakura-jpn-back.png","/public/models/sakura-jpn/sakura-jpn-onbody.png"]}
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 const galleryImages=[
@@ -140,8 +141,9 @@ const galleryImages=[
  "/public/models/mockup-print-detail.svg",
  "/public/models/mockup-fabric-detail.svg"
 ];
+const productImages=p=>p.images||galleryImages;
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
- <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="/public/models/mockup-front.svg" alt="${p.name} — mockup referencial" loading="lazy"></div>
+ <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${(p.images||galleryImages)[0]}" alt="${p.name} — vista frontal" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
@@ -150,7 +152,7 @@ let detailProduct=0,detailColor="",detailSize=null,detailQty=1,detailImage=0;
 const modal=$("#product-modal"),modalBackdrop=$("#product-modal-backdrop");
 function setDetailImage(index){
  detailImage=index;
- $("#detail-main-image").src=galleryImages[index];
+ $("#detail-main-image").src=productImages(catalog[detailProduct])[index];
  $("#detail-main-image").alt=catalog[detailProduct].name+" — vista "+(index+1);
  $("#detail-thumbnails").querySelectorAll("button").forEach((b,n)=>b.classList.toggle("active",n===index));
 }
@@ -168,7 +170,7 @@ function openDetail(index,color=null){
  $("#detail-price").textContent="S/ "+p.price.toFixed(2);
  $("#detail-swatches").innerHTML=p.colors.map(c=>`<button type="button" class="swatch ${c===detailColor?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("");
  $("#detail-sizes").innerHTML=["S","M","L","XL"].map(size=>`<button type="button" data-size="${size}">${size}</button>`).join("");
- $("#detail-thumbnails").innerHTML=galleryImages.map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
+ $("#detail-thumbnails").innerHTML=productImages(p).map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
  $("#detail-thumbnails").querySelectorAll("button").forEach(b=>b.onclick=()=>setDetailImage(Number(b.dataset.image)));
  $("#detail-swatches").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailColor=b.dataset.color;updateDetailOptions()});
  $("#detail-sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailSize=detailSize===b.dataset.size?null:b.dataset.size;updateDetailOptions()});
