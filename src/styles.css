@@ -998,3 +998,17 @@ body.modal-open{overflow:hidden}
   color: #080808 !important;
   outline-color: #080808 !important;
 }
+
+/* Product detail modal close icon: black */
+.product-modal .product-modal-close,
+.product-modal .detail-close,
+.product-modal button[aria-label="Cerrar"],
+.product-modal button[aria-label="Close"] {
+  color:#080808 !important;
+}
+.product-modal .product-modal-close svg,
+.product-modal .detail-close svg,
+.product-modal button[aria-label="Cerrar"] svg,
+.product-modal button[aria-label="Close"] svg {
+  stroke:#080808 !important;
+}
