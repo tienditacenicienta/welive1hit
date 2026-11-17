@@ -1,5 +1,5 @@
 const products=[
- {name:"Polo gráfico 01 / Blanco",price:49,color:"Blanco"},
+ {name:"SAKURA JPN",price:55,color:"Blanco"},
  {name:"Polo básico / Negro",price:45,color:"Negro"},
  {name:"Polo gráfico 02 / Blanco",price:49,color:"Blanco"},
  {name:"Polo gráfico 02 / Arena",price:49,color:"Arena"},
@@ -86,9 +86,9 @@ $("#buy").onclick=()=>{
   return;
  }
  const p=products[current];
- const existing=cart.find(item=>item.name===p.name&&item.size===selectedSize);
+ const existing=cart.find(item=>item.name===p.name&&item.color===(p.color||"Blanco")&&item.size===selectedSize);
  if(existing) existing.quantity+=quantity;
- else cart.push({...p,size:selectedSize,quantity});
+ else cart.push({...p,color:p.color||"Blanco",size:selectedSize,quantity});
  render();
  selectedSize=null;quantity=1;updateSelection();
  open();
