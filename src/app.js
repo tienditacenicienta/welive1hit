@@ -296,7 +296,7 @@ updateSelection();show(0);render();
   copy.textContent="Tu pedido está registrado correctamente.";
   const productRows=order.items.map(item=>'<div class="onehit-confirm-product"><span>'+item.name+'<small>'+item.color+' · Talla '+item.size+'</small></span><b>× '+item.quantity+'</b></div>').join("");
   const shipping=order.shipping?order.shipping.method+" · S/ "+Number(order.shipping.cost).toFixed(2):"Por registrar";
-  detail.innerHTML='<div class="onehit-confirm-id">Pedido #'+shortId+' · S/ '+Number(order.total).toFixed(2)+'</div><div class="onehit-confirm-card"><span class="onehit-step">PASO 1 COMPLETADO</span><h2>Tu compra está casi lista.</h2><p>Para preparar tu pedido necesitamos que registres tus datos de envío.</p><div class="onehit-confirm-products">'+productRows+'</div><div class="onehit-confirm-shipping">Método seleccionado: <b>'+shipping+'</b></div><div class="onehit-next-step"><strong>Solo falta registrar tu envío</strong><p>Completa el formulario para indicarnos tus datos personales, dirección y método de entrega.</p></div><a class="onehit-register-link" href="'+LATAM5S_FORM_URL+'" id="onehit-register-link">REGISTRAR MI ENVÍO ↗</a><p class="onehit-countdown">Serás redirigido automáticamente en <b id="onehit-countdown">5</b> segundos.</p></div>';
+  detail.innerHTML='<div class="onehit-confirm-id">Pedido #'+shortId+' · S/ '+Number(order.total).toFixed(2)+'</div><div class="onehit-confirm-card"><span class="onehit-step">PASO 1 COMPLETADO</span><h2>Tu compra está casi lista.</h2><p>Para preparar tu pedido necesitamos que registres tus datos de envío.</p><div class="onehit-confirm-products">'+productRows+'</div><div class="onehit-confirm-shipping">Método seleccionado: <b>'+shipping+'</b></div><div class="onehit-next-step"><strong>Solo falta registrar tu envío</strong><p>Completa el formulario para indicarnos tus datos personales, dirección y método de entrega.</p></div><a class="onehit-register-link" href="'+LATAM5S_FORM_URL+'" id="onehit-register-link">REGISTRAR MI ENVÍO</a><p class="onehit-countdown">Serás redirigido automáticamente en <b id="onehit-countdown">5</b> segundos.</p></div>';
   const link=banner.querySelector("#onehit-register-link"),count=banner.querySelector("#onehit-countdown");
   let seconds=5;
   const interval=setInterval(()=>{
@@ -305,4 +305,16 @@ updateSelection();show(0);render();
   },1000);
   link.addEventListener("click",()=>clearInterval(interval));
  })();
+})();
+
+/* Ensure the muted lifestyle clips autoplay on mobile Safari when permitted. */
+(()=>{
+ const startLifestyleVideos=()=>document.querySelectorAll('.film-tile video').forEach(video=>{
+  video.muted=true;video.defaultMuted=true;video.volume=0;video.loop=true;video.autoplay=true;video.controls=false;video.playsInline=true;
+  const attempt=video.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{});
+ });
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startLifestyleVideos,{once:true});else startLifestyleVideos();
+ window.addEventListener('pageshow',startLifestyleVideos);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)startLifestyleVideos()});
+ ['touchstart','scroll'].forEach(event=>window.addEventListener(event,startLifestyleVideos,{passive:true,once:true}));
 })();
