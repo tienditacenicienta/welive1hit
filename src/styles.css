@@ -1267,3 +1267,46 @@ body.modal-open{overflow:hidden}
   opacity:1 !important;
   text-shadow:none !important;
 }
+
+
+/* ONE HIT — center and refine hero carousel arrows */
+#home .arrows button{
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+}
+#home .arrows .slider-arrow{
+  position:relative!important;
+  display:block!important;
+  width:34px!important;
+  height:1.5px!important;
+  min-width:34px!important;
+  background:#111!important;
+  border:0!important;
+  margin:0!important;
+  transform:none!important;
+  flex:none!important;
+}
+#home .arrows .slider-arrow:before{
+  content:""!important;
+  position:absolute!important;
+  display:block!important;
+  top:50%!important;
+  width:8px!important;
+  height:8px!important;
+  background:transparent!important;
+  border:0!important;
+}
+#home .arrows .slider-arrow-left:before{
+  left:0!important;
+  border-left:1.5px solid #111!important;
+  border-bottom:1.5px solid #111!important;
+  transform:translateY(-50%) rotate(45deg)!important;
+}
+#home .arrows .slider-arrow-right:before{
+  right:0!important;
+  border-top:1.5px solid #111!important;
+  border-right:1.5px solid #111!important;
+  transform:translateY(-50%) rotate(45deg)!important;
+}
+#home .arrows .slider-arrow:after{display:none!important}
