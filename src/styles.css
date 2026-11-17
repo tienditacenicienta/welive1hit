@@ -961,3 +961,13 @@ body.modal-open{overflow:hidden}
 #home .arrows .slider-arrow-left{transform:rotate(-135deg)!important;margin-left:4px!important}
 #home .arrows .slider-arrow-right{transform:rotate(45deg)!important;margin-right:4px!important}
 #home .arrows button:hover .slider-arrow{border-color:#fff!important}
+
+/* Carousel controls: restore the original simple horizontal arrow treatment. */
+#home .arrows .slider-arrow{position:relative!important;display:block!important;width:28px!important;height:2px!important;background:#111!important;border:0!important;transform:none!important;margin:0!important;}
+#home .arrows .slider-arrow:before,#home .arrows .slider-arrow:after{content:""!important;position:absolute!important;display:block!important;width:9px!important;height:9px!important;border:0!important;background:transparent!important;top:50%!important;}
+#home .arrows .slider-arrow-left:before{left:0!important;border-left:2px solid #111!important;border-bottom:2px solid #111!important;transform:translateY(-50%) rotate(45deg)!important;}
+#home .arrows .slider-arrow-left:after{display:none!important;}
+#home .arrows .slider-arrow-right:before{right:0!important;border-top:2px solid #111!important;border-right:2px solid #111!important;transform:translateY(-50%) rotate(45deg)!important;}
+#home .arrows .slider-arrow-right:after{display:none!important;}
+#home .arrows .slider-arrow-left{transform:none!important;}
+#home .arrows .slider-arrow-right{transform:none!important;}
