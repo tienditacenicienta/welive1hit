@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/styles.css?v=film-lockup-size-004">
 </head><body>
-<header class="header"><a class="logo" href="#home" aria-label="ONE HIT"><img src="/public/brand/onehit-header-logo.png" alt="ONE HIT®"></a><nav><a href="#shop">TIENDA</a><a href="#shop">COLECCIONES</a><a href="#about">NOSOTROS</a></nav><button class="bag" id="bag">BOLSA <span id="bag-count">0</span><i class="ui-arrow" aria-hidden="true"></i></button></header>
+<header class="header"><a class="logo" href="#home" aria-label="ONE HIT"><img src="/public/brand/onehit-header-logo.png" alt="ONE HIT®"></a><nav><a href="#shop">TIENDA</a><a href="#shop">COLECCIONES</a><a href="#about">NOSOTROS</a></nav><button class="bag" id="bag">BOLSA <span id="bag-count">0</span></button></header>
 <main>
 <section class="hero" id="home">
 <img class="giant-logo" src="/public/brand/onehit-logo.png" alt="" aria-hidden="true">
@@ -18,11 +18,11 @@
 <div class="model-slide graphic-look"><img src="/public/models/model-graphic.webp" alt="Modelo con polo de colección"></div>
 <div class="model-slide hoodie-look"><img src="/public/models/model-hoodie.webp" alt="Modelo con hoodie"></div>
 </div></div>
-<div class="arrows"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
+<div class="arrows"><button id="prev" aria-label="Anterior"><span class="slider-arrow slider-arrow-left" aria-hidden="true"></span></button><button id="next" aria-label="Siguiente"><span class="slider-arrow slider-arrow-right" aria-hidden="true"></span></button></div>
 <div class="product-meta"><small id="slide-number">01 / 05</small><b id="product-name">POLO GRÁFICO 01 / BLANCO</b><span id="product-price">S/ 49.00</span></div>
 <div class="purchase-options" aria-label="Seleccionar talla y cantidad"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options" id="size-options"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div>
 <div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" id="qty-minus" aria-label="Disminuir cantidad">−</button><output id="quantity">1</output><button type="button" id="qty-plus" aria-label="Aumentar cantidad">+</button></div></div></div>
-<button class="buy" id="buy">AÑADIR A LA BOLSA<i class="ui-arrow" aria-hidden="true"></i></button>
+<button class="buy" id="buy">AÑADIR A LA BOLSA</button>
 <div class="indicators" id="indicators"><button class="active"></button><button></button><button></button><button></button><button></button></div>
 </section>
 <section class="shop" id="shop"><div class="shop-title"><h2><strong class="shop-title-tu">TÚ</strong> <span class="shop-title-regular">eres quien</span> <strong>ELIGE.</strong></h2></div><div class="shop-grid" id="shop-grid"></div></section>
@@ -36,14 +36,14 @@
  </div>
  <!-- Simulación temporal del video. Reemplazar este bloque por un video MP4 cuando esté listo. -->
  <div class="film-collage" aria-label="Collage visual animado de estilo de vida">
-  <div class="film-tile film-tile-a"><video src="/public/videos/video-01.mp4" autoplay muted loop playsinline preload="metadata" aria-label="ONE HIT — LIVE IT"></video><span>LIVE IT.</span></div>
+  <div class="film-tile film-tile-a"><video src="/public/videos/video-01.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="ONE HIT — LIVE IT"></video><span>LIVE IT.</span></div>
   <div class="film-tile film-tile-b"><video src="/public/videos/video-02.mp4" autoplay muted loop playsinline preload="metadata" aria-label="ONE HIT — MOVE FAST"></video><span>MOVE FAST.</span></div>
   <div class="film-tile film-tile-c"><video src="/public/videos/video-03.mp4" autoplay muted loop playsinline preload="metadata" aria-label="ONE HIT — NO REPEAT"></video><span>NO REPEAT.</span></div>
   <div class="film-tile film-tile-d"><video src="/public/videos/video-04.mp4" autoplay muted loop playsinline preload="metadata" aria-label="ONE HIT — BE YOU"></video><span>BE YOU.</span></div>
   <div class="film-tile film-tile-e"><video src="/public/videos/video-05.mp4" autoplay muted loop playsinline preload="metadata" aria-label="ONE HIT — 1HIT"></video><span>1HIT.</span></div>
   <div class="film-center-mark"><img src="/public/brand/we-live-1hit-lockup.png" alt="WE LIVE 1HIT" /></div>
  </div>
- <div class="lifestyle-film-foot"><span>UNA VIDA. MUCHAS VERSIONES.</span><button class="lifestyle-cart-trigger" id="lifestyle-cart-trigger" type="button" aria-label="Abrir tu bolsa">PLAY IT YOUR WAY<i class="ui-arrow" aria-hidden="true"></i></button></div>
+ <div class="lifestyle-film-foot"><span>UNA VIDA. MUCHAS VERSIONES.</span><button class="lifestyle-cart-trigger" id="lifestyle-cart-trigger" type="button" aria-label="Abrir tu bolsa">PLAY IT YOUR WAY</button></div>
 </section>
 <section class="custom-order" id="pedidos-personalizados">
  <div class="custom-order-copy">
@@ -52,7 +52,7 @@
   <p class="custom-order-description">¿Buscas un diseño personalizado o prendas por cantidad?<br class="custom-order-desktop-break">Cuéntanos tu idea y creemos algo juntos.</p>
  </div>
  <a class="custom-order-cta" href="https://wa.me/51960945765?text=Hola%20ONE%20HIT%2C%20quiero%20consultar%20por%20un%20dise%C3%B1o%20personalizado%20o%20un%20pedido%20por%20cantidad." target="_blank" rel="noopener noreferrer">
-  <span>HABLEMOS POR WHATSAPP</span><i class="ui-arrow custom-order-arrow" aria-hidden="true"></i>
+  <span>HABLEMOS POR WHATSAPP</span>
  </a>
 </section>
 <section class="about" id="about"><p>NO ES SOLO LO QUE VISTES.</p><h2>We Live 1HIT.<span class="about-socials" aria-label="Redes sociales de ONE HIT">
