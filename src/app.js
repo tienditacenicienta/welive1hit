@@ -132,7 +132,7 @@ $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-pr
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
- <button class="card-add" type="button">AÑADIR A LA BOLSA ↗</button></div></article>`).join("");
+ <button class="card-add" type="button">AÑADIR A LA BOLSA</button></div></article>`).join("");
 let detailProduct=0,detailColor="",detailSize=null,detailQty=1,detailImage=0;
 const modal=$("#product-modal"),modalBackdrop=$("#product-modal-backdrop");
 function setDetailImage(index){
