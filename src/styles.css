@@ -1018,3 +1018,10 @@ body.modal-open{overflow:hidden}
   color: #080808 !important;
   -webkit-text-fill-color: #080808 !important;
 }
+
+/* ONE HIT accent: Pantone 185 C */
+.header .bag,
+.header .bag #bag-count {
+  color: #E4002B !important;
+  -webkit-text-fill-color: #E4002B !important;
+}
