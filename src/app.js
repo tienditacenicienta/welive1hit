@@ -124,15 +124,14 @@ $("#checkout").onclick=async()=>{
 };
 
 const catalog=[
- {name:"PROV. 17:22",price:49,colors:["Blanco","Negro","Gris"]},
+ {name:"SAKURA JPN",price:55,colors:["Blanco"],images:["/public/models/sakura-jpn/sakura-jpn-front.png","/public/models/sakura-jpn/sakura-jpn-back.png","/public/models/sakura-jpn/sakura-jpn-onbody.png"],listingImage:"/public/models/sakura-jpn/sakura-jpn-back.png"},
  {name:"ONE MOMENT",price:49,colors:["Negro","Blanco"]},
  {name:"NO FEAR",price:49,colors:["Blanco","Negro","Gris"]},
  {name:"LIVE YOUR 1HIT",price:49,colors:["Negro","Blanco"]},
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
  {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
  {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
- {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]},
- {name:"SAKURA JPN",price:55,colors:["Blanco"],images:["/public/models/sakura-jpn/sakura-jpn-front.png","/public/models/sakura-jpn/sakura-jpn-back.png","/public/models/sakura-jpn/sakura-jpn-onbody.png"]}
+ {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]}
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 const galleryImages=[
@@ -143,7 +142,7 @@ const galleryImages=[
 ];
 const productImages=p=>p.images||galleryImages;
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
- <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${(p.images||galleryImages)[0]}" alt="${p.name} — vista frontal" loading="lazy"></div>
+ <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${p.listingImage||(p.images||galleryImages)[0]}" alt="${p.name} — vista principal" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
