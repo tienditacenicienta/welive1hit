@@ -24,8 +24,21 @@ $("#prev").onclick=()=>show(current-1);
 $("#next").onclick=()=>show(current+1);
 document.querySelectorAll("#indicators button").forEach((b,i)=>b.onclick=()=>show(i));
 
-function open(){ $("#drawer").classList.add("open");$("#backdrop").classList.add("open") }
-function close(){ $("#drawer").classList.remove("open");$("#backdrop").classList.remove("open") }
+let drawerScrollY=0;
+function lockPageForDrawer(){
+ if(document.body.classList.contains("drawer-open"))return;
+ drawerScrollY=window.scrollY||window.pageYOffset||0;
+ document.body.classList.add("drawer-open");
+ document.body.style.top=`-${drawerScrollY}px`;
+}
+function unlockPageForDrawer(){
+ if(!document.body.classList.contains("drawer-open"))return;
+ document.body.classList.remove("drawer-open");
+ document.body.style.top="";
+ window.scrollTo(0,drawerScrollY);
+}
+function open(){ lockPageForDrawer();$("#drawer").classList.add("open");$("#backdrop").classList.add("open") }
+function close(){ $("#drawer").classList.remove("open");$("#backdrop").classList.remove("open");unlockPageForDrawer() }
 $("#bag").onclick=open;
 $("#lifestyle-cart-trigger").addEventListener("click",event=>{
  event.preventDefault();
