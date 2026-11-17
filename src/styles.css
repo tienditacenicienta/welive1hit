@@ -1253,3 +1253,17 @@ body.modal-open{overflow:hidden}
   right:0;
 }
 .drawer-backdrop.open { touch-action:none; }
+
+
+/* ONE HIT — selected size on the main hero banner */
+#home .size-options button.selected,
+#home .size-options button.selected:hover,
+#home .size-options button.selected:focus,
+#home .size-options button.selected:active {
+  background-color:#080808 !important;
+  border-color:#080808 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
