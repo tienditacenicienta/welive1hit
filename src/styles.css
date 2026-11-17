@@ -936,3 +936,13 @@ body.modal-open{overflow:hidden}
 .header .logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:150px!important;height:48px!important;min-height:48px!important;max-height:none!important;overflow:visible!important;line-height:0!important;padding:0!important}
 .header .logo img{display:block!important;width:150px!important;height:auto!important;max-width:150px!important;max-height:none!important;min-height:0!important;object-fit:contain!important;object-position:left center!important;overflow:visible!important;clip-path:none!important;transform:none!important}
 @media(max-width:700px){.header .logo{width:126px!important;height:42px!important;min-height:42px!important}.header .logo img{width:126px!important;max-width:126px!important}}
+/* ONE HIT: consistent CSS arrow icon, avoiding platform emoji rendering */
+.ui-arrow{display:inline-block;position:relative;width:13px;height:13px;flex:0 0 13px;vertical-align:middle;margin-left:12px}
+.ui-arrow:before{content:"";position:absolute;right:1px;top:1px;width:8px;height:8px;border-top:2px solid currentColor;border-right:2px solid currentColor}
+.ui-arrow:after{content:"";position:absolute;left:1px;bottom:2px;width:10px;height:2px;background:currentColor;transform:rotate(-45deg);transform-origin:left center}
+.custom-order-arrow{width:18px;height:18px;flex-basis:18px;margin-left:auto}
+.custom-order-arrow:before{width:12px;height:12px;border-width:2.5px}
+.custom-order-arrow:after{width:15px;height:2.5px;bottom:3px}
+.lifestyle-cart-trigger{display:inline-flex;align-items:center;gap:8px}
+.buy .ui-arrow{margin-left:18px}
+.bag .ui-arrow{margin-left:0}
