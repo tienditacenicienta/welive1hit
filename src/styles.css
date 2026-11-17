@@ -1310,3 +1310,24 @@ body.modal-open{overflow:hidden}
   transform:translateY(-50%) rotate(45deg)!important;
 }
 #home .arrows .slider-arrow:after{display:none!important}
+
+
+/* ONE HIT — size selector hover must stay legible; selected remains inverted */
+#home .size-options button:hover:not(.selected),
+.shop-controls .size-options button:hover:not(.selected),
+#detail-sizes button:hover:not(.selected) {
+  background-color:#e8e8e8 !important;
+  border-color:#111 !important;
+  color:#080808 !important;
+  -webkit-text-fill-color:#080808 !important;
+  opacity:1 !important;
+}
+#home .size-options button.selected,
+.shop-controls .size-options button.selected,
+#detail-sizes button.selected {
+  background-color:#080808 !important;
+  border-color:#080808 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  opacity:1 !important;
+}
