@@ -1227,3 +1227,29 @@ body.modal-open{overflow:hidden}
     bottom: 2% !important;
   }
 }
+
+
+/* ONE HIT — mobile selection contrast and isolated shopping-bag scrolling */
+#detail-sizes button.selected,
+.shop-controls .size-options button.selected,
+.card-sizes button.selected {
+  background:#080808 !important;
+  border-color:#080808 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+}
+.drawer {
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+}
+.drawer-head,.drawer-foot { flex-shrink:0; }
+.drawer-open {
+  position:fixed;
+  width:100%;
+  overflow:hidden;
+  left:0;
+  right:0;
+}
+.drawer-backdrop.open { touch-action:none; }
