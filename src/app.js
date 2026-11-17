@@ -125,7 +125,7 @@ $("#checkout").onclick=async()=>{
 
 const catalog=[
  {name:"SAKURA JPN",price:55,colors:["Blanco"],images:["/public/models/sakura-jpn/sakura-jpn-front.png","/public/models/sakura-jpn/sakura-jpn-back.png","/public/models/sakura-jpn/sakura-jpn-onbody.png"],listingImage:"/public/models/sakura-jpn/sakura-jpn-back.png"},
- {name:"ONE MOMENT",price:49,colors:["Negro","Blanco"]},
+ {name:"BONUM",price:45,colors:["Negro","Blanco"],imagesByColor:{Negro:["/public/models/bonum/black-back.png","/public/models/bonum/black-front.png","/public/models/bonum/black-model.png"],Blanco:["/public/models/bonum/white-back.png","/public/models/bonum/white-front.png","/public/models/bonum/white-model.png"]},listingImage:"/public/models/bonum/black-back.png"},
  {name:"NO FEAR",price:49,colors:["Blanco","Negro","Gris"]},
  {name:"LIVE YOUR 1HIT",price:49,colors:["Negro","Blanco"]},
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
@@ -140,7 +140,7 @@ const galleryImages=[
  "/public/models/mockup-print-detail.svg",
  "/public/models/mockup-fabric-detail.svg"
 ];
-const productImages=p=>p.images||galleryImages;
+const productImages=(p,color=null)=>p.imagesByColor?.[color||p.colors[0]]||p.images||galleryImages;
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
  <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${p.listingImage||(p.images||galleryImages)[0]}" alt="${p.name} — vista principal" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
@@ -151,12 +151,19 @@ let detailProduct=0,detailColor="",detailSize=null,detailQty=1,detailImage=0;
 const modal=$("#product-modal"),modalBackdrop=$("#product-modal-backdrop");
 function setDetailImage(index){
  detailImage=index;
- $("#detail-main-image").src=productImages(catalog[detailProduct])[index];
+ $("#detail-main-image").src=productImages(catalog[detailProduct],detailColor)[index];
  $("#detail-main-image").alt=catalog[detailProduct].name+" — vista "+(index+1);
  $("#detail-thumbnails").querySelectorAll("button").forEach((b,n)=>b.classList.toggle("active",n===index));
 }
 function updateDetailOptions(){
  $("#detail-color-name").textContent=detailColor;
+ const p=catalog[detailProduct];
+ if(p.imagesByColor){
+  const imgs=productImages(p,detailColor);
+  $("#detail-thumbnails").innerHTML=imgs.map((src,n)=>'<button type="button" class="'+(n===detailImage?'active':'')+'" data-image="'+n+'" aria-label="Ver imagen '+(n+1)+'"><img src="'+src+'" alt=""></button>').join("");
+  $("#detail-thumbnails").querySelectorAll("button").forEach(b=>b.onclick=()=>setDetailImage(Number(b.dataset.image)));
+  setDetailImage(Math.min(detailImage,imgs.length-1));
+ }
  $("#detail-swatches").querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.color===detailColor));
  $("#detail-sizes").querySelectorAll("button").forEach(b=>b.classList.toggle("selected",b.dataset.size===detailSize));
  $("#detail-quantity").textContent=detailQty;
@@ -169,7 +176,7 @@ function openDetail(index,color=null){
  $("#detail-price").textContent="S/ "+p.price.toFixed(2);
  $("#detail-swatches").innerHTML=p.colors.map(c=>`<button type="button" class="swatch ${c===detailColor?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("");
  $("#detail-sizes").innerHTML=["S","M","L","XL"].map(size=>`<button type="button" data-size="${size}">${size}</button>`).join("");
- $("#detail-thumbnails").innerHTML=productImages(p).map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
+ $("#detail-thumbnails").innerHTML=productImages(p,detailColor).map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
  $("#detail-thumbnails").querySelectorAll("button").forEach(b=>b.onclick=()=>setDetailImage(Number(b.dataset.image)));
  $("#detail-swatches").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailColor=b.dataset.color;updateDetailOptions()});
  $("#detail-sizes").querySelectorAll("button").forEach(b=>b.onclick=()=>{detailSize=detailSize===b.dataset.size?null:b.dataset.size;updateDetailOptions()});
@@ -204,7 +211,9 @@ document.querySelectorAll(".shop-card").forEach(card=>{
   card.querySelectorAll(".swatch").forEach(x=>x.classList.toggle("active",x===btn));
   card.querySelector(".selected-color").textContent=chosenColor;
   const img=card.querySelector(".shop-image img");
-  img.style.filter=chosenColor==="Negro"?"brightness(.72) contrast(1.15)":chosenColor==="Gris"?"grayscale(.7)":"none";
+    const product=catalog[index];
+    if(product.imagesByColor){img.src=product.imagesByColor[chosenColor][0];img.style.filter="none";}
+    else img.style.filter=chosenColor==="Negro"?"brightness(.72) contrast(1.15)":chosenColor==="Gris"?"grayscale(.7)":"none";
  });
  card.querySelector(".card-add").onclick=()=>{
   const p=catalog[index];
