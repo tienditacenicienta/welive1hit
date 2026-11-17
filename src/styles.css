@@ -1012,3 +1012,9 @@ body.modal-open{overflow:hidden}
 .product-modal button[aria-label="Close"] svg {
   stroke:#080808 !important;
 }
+
+/* Cart drawer close button */
+#close {
+  color: #080808 !important;
+  -webkit-text-fill-color: #080808 !important;
+}
