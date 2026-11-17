@@ -975,3 +975,26 @@ body.modal-open{overflow:hidden}
 /* Mobile Safari keeps :hover after a tap; carousel arrows must never turn into black discs. */
 #home .arrows button:hover,#home .arrows button:focus,#home .arrows button:focus-visible,#home .arrows button:active{background:#ffffffd9!important;color:#111!important;outline:none!important;}
 #home .arrows button:hover .slider-arrow,#home .arrows button:focus .slider-arrow,#home .arrows button:active .slider-arrow{border-color:#111!important;background:#111!important;}
+
+/* ONE HIT — neutralizar acentos azules de controles interactivos */
+#home .quantity-control button,
+.shop-controls .quantity-control button,
+.detail-info .quantity-control button,
+.detail-sizes button,
+.shop-controls .size-options button,
+#home .size-options button,
+.card-size,
+.card-qty {
+  color: #080808 !important;
+  accent-color: #080808 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+#home .quantity-control button:focus,
+#home .quantity-control button:active,
+.shop-controls .quantity-control button:focus,
+.shop-controls .quantity-control button:active,
+.detail-info .quantity-control button:focus,
+.detail-info .quantity-control button:active {
+  color: #080808 !important;
+  outline-color: #080808 !important;
+}
