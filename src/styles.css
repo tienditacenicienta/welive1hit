@@ -946,3 +946,11 @@ body.modal-open{overflow:hidden}
 .lifestyle-cart-trigger{display:inline-flex;align-items:center;gap:8px}
 .buy .ui-arrow{margin-left:18px}
 .bag .ui-arrow{margin-left:0}
+
+/* ONE HIT: remove arrow glyphs; keep slider navigation as consistent CSS chevrons */
+.ui-arrow,.custom-order-arrow{display:none!important}
+.slider-arrow{display:block;width:11px;height:11px;border-top:2px solid currentColor;border-right:2px solid currentColor}
+.slider-arrow-left{transform:rotate(-135deg);margin-left:4px}
+.slider-arrow-right{transform:rotate(45deg);margin-right:4px}
+.film-tile video{pointer-events:none;-webkit-appearance:none;appearance:none}
+.film-tile video::-webkit-media-controls,.film-tile video::-webkit-media-controls-enclosure,.film-tile video::-webkit-media-controls-panel{display:none!important;opacity:0!important}
