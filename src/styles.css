@@ -971,3 +971,7 @@ body.modal-open{overflow:hidden}
 #home .arrows .slider-arrow-right:after{display:none!important;}
 #home .arrows .slider-arrow-left{transform:none!important;}
 #home .arrows .slider-arrow-right{transform:none!important;}
+
+/* Mobile Safari keeps :hover after a tap; carousel arrows must never turn into black discs. */
+#home .arrows button:hover,#home .arrows button:focus,#home .arrows button:focus-visible,#home .arrows button:active{background:#ffffffd9!important;color:#111!important;outline:none!important;}
+#home .arrows button:hover .slider-arrow,#home .arrows button:focus .slider-arrow,#home .arrows button:active .slider-arrow{border-color:#111!important;background:#111!important;}
