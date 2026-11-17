@@ -954,3 +954,10 @@ body.modal-open{overflow:hidden}
 .slider-arrow-right{transform:rotate(45deg);margin-right:4px}
 .film-tile video{pointer-events:none;-webkit-appearance:none;appearance:none}
 .film-tile video::-webkit-media-controls,.film-tile video::-webkit-media-controls-enclosure,.film-tile video::-webkit-media-controls-panel{display:none!important;opacity:0!important}
+
+/* Keep only the two hero carousel arrows visible inside their circular controls. */
+#home .arrows button{color:#080808!important;opacity:1!important}
+#home .arrows .slider-arrow{display:block!important;width:11px!important;height:11px!important;border-top:2px solid #080808!important;border-right:2px solid #080808!important;opacity:1!important}
+#home .arrows .slider-arrow-left{transform:rotate(-135deg)!important;margin-left:4px!important}
+#home .arrows .slider-arrow-right{transform:rotate(45deg)!important;margin-right:4px!important}
+#home .arrows button:hover .slider-arrow{border-color:#fff!important}
