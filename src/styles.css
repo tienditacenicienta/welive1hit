@@ -1177,3 +1177,53 @@ body.modal-open{overflow:hidden}
     gap: 24px;
   }
 }
+
+
+/* LANDSCAPE FOLLOW-UP: keep hero content from colliding on short phone screens.
+   Applies only to landscape tablet/phone CSS widths; portrait and desktop are untouched. */
+@media screen and (orientation: landscape) and (min-width: 701px) and (max-width: 1100px) and (max-height: 520px) {
+  #home.hero {
+    height: 620px !important;
+    min-height: 620px !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+  #home .header {
+    height: 58px !important;
+  }
+  #home .headline {
+    top: 35% !important;
+    left: 4.5% !important;
+    transform: none !important;
+  }
+  #home.hero > .headline span {
+    font-size: clamp(34px, 5vw, 52px) !important;
+  }
+  #home.hero > .headline strong {
+    font-size: clamp(54px, 7.4vw, 78px) !important;
+  }
+  #home .model-window {
+    inset: 7% 0 0 !important;
+  }
+  #home .model-slide img {
+    height: 94% !important;
+    max-width: 43vw !important;
+  }
+  #home .product-meta {
+    bottom: 25% !important;
+    gap: 7px !important;
+  }
+  #home .purchase-options {
+    bottom: 13% !important;
+    gap: 22px !important;
+  }
+  #home .buy {
+    bottom: 3.5% !important;
+  }
+  #home .arrows {
+    top: 55% !important;
+  }
+  #home .indicators {
+    bottom: 2% !important;
+  }
+}
