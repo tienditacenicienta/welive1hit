@@ -1331,3 +1331,24 @@ body.modal-open{overflow:hidden}
   -webkit-text-fill-color:#fff !important;
   opacity:1 !important;
 }
+
+
+/* Mobile product modal: keep the close control visible while its content scrolls */
+@media(max-width:700px){
+ .product-modal .product-modal-close{
+  position:sticky;
+  top:0;
+  align-self:start;
+  justify-self:end;
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  margin:0 0 -36px auto;
+  padding:0;
+  background:#fff;
+  border-radius:50%;
+  z-index:20;
+  line-height:1;
+ }
+}
