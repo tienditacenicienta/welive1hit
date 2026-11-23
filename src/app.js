@@ -364,3 +364,5 @@ updateSelection();show(0);render();
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)startLifestyleVideos()});
  ['touchstart','scroll'].forEach(event=>window.addEventListener(event,startLifestyleVideos,{passive:true,once:true}));
 })();
+
+/* I LOVE HATERS assets are stored in public/models/i-love-haters. */
