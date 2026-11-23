@@ -131,7 +131,7 @@ const catalog=[
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
  {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
  {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
- {name:"CREA TU 1HIT",price:99,colors:["Negro","Blanco"],custom:true}
+ {name:"CREA TU 1HIT",price:99,colors:["Negro","Blanco"],imagesByColor:{Negro:["/public/models/crea-tu-1hit/black-front.png","/public/models/crea-tu-1hit/black-back.png"],Blanco:["/public/models/crea-tu-1hit/white-front.png","/public/models/crea-tu-1hit/white-back.png"]},listingImage:"/public/models/crea-tu-1hit/black-front.png",custom:true}
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 const galleryImages=[
