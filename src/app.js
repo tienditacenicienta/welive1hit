@@ -196,8 +196,14 @@ function requestCustomDesign(color,size,qty){
  const url="https://wa.me/51960945765?text="+encodeURIComponent(message);
  window.open(url,"_blank","noopener,noreferrer");
 }
-$("#detail-add").onclick=()=>{
- if(catalog[detailProduct].custom){if(!detailSize){$("#detail-sizes").classList.add("needs-size");return}requestCustomDesign(detailColor,detailSize,detailQty);return}
+$("#detail-add").onclick=(event)=>{
+ event.preventDefault();
+ event.stopPropagation();
+ if(catalog[detailProduct].custom){
+  if(!detailSize){$("#detail-sizes").classList.add("needs-size");return}
+  requestCustomDesign(detailColor,detailSize,detailQty);
+  return;
+ }
  if(!detailSize){$("#detail-sizes").classList.add("needs-size");return}
  const p=catalog[detailProduct],item={name:p.name,price:p.price,color:detailColor,size:detailSize,quantity:detailQty};
  const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
@@ -225,9 +231,15 @@ document.querySelectorAll(".shop-card").forEach(card=>{
     if(product.imagesByColor){img.src=product.imagesByColor[chosenColor][0];img.style.filter="none";}
     else img.style.filter=chosenColor==="Negro"?"brightness(.72) contrast(1.15)":chosenColor==="Gris"?"grayscale(.7)":"none";
  });
- card.querySelector(".card-add").onclick=()=>{
+ card.querySelector(".card-add").onclick=(event)=>{
+  event.preventDefault();
+  event.stopPropagation();
   const p=catalog[index];
-  if(p.custom){if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}requestCustomDesign(chosenColor,chosenSize,qty);return}
+  if(p.custom){
+   if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}
+   requestCustomDesign(chosenColor,chosenSize,qty);
+   return;
+  }
   if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}
   const item={name:p.name,price:p.price,color:chosenColor,size:chosenSize,quantity:qty};
   const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
