@@ -1358,7 +1358,7 @@ body.modal-open{overflow:hidden}
 .shop-card.is-custom .shop-image,
 .detail-main-image.is-custom{
  position:relative;
- border:1px solid #080808;
+ border:4px solid #080808;
  box-sizing:border-box;
 }
 .shop-card.is-custom .shop-image::before,
@@ -1366,16 +1366,16 @@ body.modal-open{overflow:hidden}
  content:"PERSONALIZA TU DISEÑO";
  position:absolute;
  z-index:3;
- top:12px;
- left:12px;
+ top:0;
+ left:0;
  display:inline-flex;
  align-items:center;
  justify-content:center;
- padding:8px 10px;
- background:#E31837;
- color:#fff;
- font:900 9px/1 "DM Sans",Arial,sans-serif;
- letter-spacing:.09em;
+ padding:10px 14px;
+ background:#080808;
+ color:#E31837;
+ font:900 10px/1 "DM Sans",Arial,sans-serif;
+ letter-spacing:.1em;
  text-transform:uppercase;
 }
 .shop-card.is-custom .shop-image img,
