@@ -131,7 +131,7 @@ const catalog=[
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
  {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
  {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
- {name:"1HIT CLASSIC",price:45,colors:["Negro","Blanco"]}
+ {name:"CREA TU 1HIT",price:99,colors:["Negro","Blanco"],custom:true}
 ];
 const colorHex={Blanco:"#fff",Negro:"#111",Gris:"#929292"};
 const galleryImages=[
@@ -141,12 +141,12 @@ const galleryImages=[
  "/public/models/mockup-fabric-detail.svg"
 ];
 const productImages=(p,color=null)=>p.imagesByColor?.[color||p.colors[0]]||p.images||galleryImages;
-$("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card" data-product="${i}">
- <div class="shop-image" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${p.listingImage||(p.images||galleryImages)[0]}" alt="${p.name} — vista principal" loading="lazy"></div>
+$("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card ${p.custom?"is-custom":""}" data-product="${i}">
+ <div class="shop-image ${p.custom?"is-custom":""}" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${p.listingImage||(p.images||galleryImages)[0]}" alt="${p.name} — vista principal" loading="lazy"></div>
  <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
- <button class="card-add" type="button">AÑADIR A LA BOLSA</button></div></article>`).join("");
+ <button class="card-add" type="button">${p.custom?"PEDIR MI DISEÑO":"AÑADIR A LA BOLSA"}</button></div></article>`).join("");
 let detailProduct=0,detailColor="",detailSize=null,detailQty=1,detailImage=0;
 const modal=$("#product-modal"),modalBackdrop=$("#product-modal-backdrop");
 function setDetailImage(index){
@@ -174,6 +174,10 @@ function openDetail(index,color=null){
  detailColor=color||p.colors[0];detailSize=null;detailQty=1;
  $("#detail-name").textContent=p.name;
  $("#detail-price").textContent="S/ "+p.price.toFixed(2);
+ $("#detail-main-image").parentElement.classList.toggle("is-custom",Boolean(p.custom));
+ modal.classList.toggle("custom-product-open",Boolean(p.custom));
+ $("#detail-add").textContent=p.custom?"PEDIR MI DISEÑO":"AÑADIR A LA BOLSA";
+ $("#detail-note").textContent=p.custom?"Cuéntanos cómo imaginas tu estampado. Coordinaremos los detalles por WhatsApp.":"Selecciona tu color, talla y cantidad antes de añadir a tu bolsa.";
  $("#detail-swatches").innerHTML=p.colors.map(c=>`<button type="button" class="swatch ${c===detailColor?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("");
  $("#detail-sizes").innerHTML=["S","M","L","XL"].map(size=>`<button type="button" data-size="${size}">${size}</button>`).join("");
  $("#detail-thumbnails").innerHTML=productImages(p,detailColor).map((src,n)=>`<button type="button" class="${n===0?"active":""}" data-image="${n}" aria-label="Ver imagen ${n+1}"><img src="${src}" alt=""></button>`).join("");
@@ -187,7 +191,13 @@ function closeDetail(){modal.classList.remove("open");modalBackdrop.classList.re
 $("#detail-close").onclick=closeDetail;modalBackdrop.onclick=closeDetail;
 $("#detail-minus").onclick=()=>{detailQty=Math.max(1,detailQty-1);updateDetailOptions()};
 $("#detail-plus").onclick=()=>{detailQty=Math.min(20,detailQty+1);updateDetailOptions()};
+function requestCustomDesign(color,size,qty){
+ const message=["¡Hola, ONE HIT! Quiero pedir mi diseño personalizado.","Producto: CREA TU 1HIT","Color: "+color,"Talla: "+size,"Cantidad: "+qty,"Quiero coordinar los detalles del estampado y confirmar mi pedido. ¡Gracias!"].join("\n");
+ const url="https://wa.me/51960945765?text="+encodeURIComponent(message);
+ window.open(url,"_blank","noopener,noreferrer");
+}
 $("#detail-add").onclick=()=>{
+ if(catalog[detailProduct].custom){if(!detailSize){$("#detail-sizes").classList.add("needs-size");return}requestCustomDesign(detailColor,detailSize,detailQty);return}
  if(!detailSize){$("#detail-sizes").classList.add("needs-size");return}
  const p=catalog[detailProduct],item={name:p.name,price:p.price,color:detailColor,size:detailSize,quantity:detailQty};
  const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
@@ -217,6 +227,7 @@ document.querySelectorAll(".shop-card").forEach(card=>{
  });
  card.querySelector(".card-add").onclick=()=>{
   const p=catalog[index];
+  if(p.custom){if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}requestCustomDesign(chosenColor,chosenSize,qty);return}
   if(!chosenSize){card.querySelector(".card-sizes").classList.add("needs-size");return}
   const item={name:p.name,price:p.price,color:chosenColor,size:chosenSize,quantity:qty};
   const existing=cart.find(x=>x.name===item.name&&x.color===item.color&&x.size===item.size);
