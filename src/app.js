@@ -1,6 +1,6 @@
 const products=[
  {name:"SAKURA JPN",price:55,color:"Blanco"},
- {name:"Polo básico / Negro",price:45,color:"Negro"},
+ {name:"BONUM",price:45,color:"Negro"},
  {name:"Polo gráfico 02 / Blanco",price:49,color:"Blanco"},
  {name:"Polo gráfico 02 / Arena",price:49,color:"Arena"},
  {name:"Hoodie ONE HIT / Negro",price:89,color:"Negro"}
