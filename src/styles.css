@@ -1352,3 +1352,41 @@ body.modal-open{overflow:hidden}
   line-height:1;
  }
 }
+
+
+/* ONE HIT CUSTOM — visual identity exclusive to CREA TU 1HIT */
+.shop-card.is-custom .shop-image,
+.detail-main-image.is-custom{
+ position:relative;
+ border:1px solid #080808;
+ box-sizing:border-box;
+}
+.shop-card.is-custom .shop-image::before,
+.detail-main-image.is-custom::before{
+ content:"PERSONALIZA TU DISEÑO";
+ position:absolute;
+ z-index:3;
+ top:12px;
+ left:12px;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ padding:8px 10px;
+ background:#E31837;
+ color:#fff;
+ font:900 9px/1 "DM Sans",Arial,sans-serif;
+ letter-spacing:.09em;
+ text-transform:uppercase;
+}
+.shop-card.is-custom .shop-image img,
+.detail-main-image.is-custom img{
+ position:relative;
+ z-index:1;
+}
+.shop-card.is-custom .card-add{
+ background:#080808;
+ color:#fff;
+}
+.shop-card.is-custom .card-add:hover{
+ background:#333;
+}
