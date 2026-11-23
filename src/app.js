@@ -194,7 +194,7 @@ $("#detail-plus").onclick=()=>{detailQty=Math.min(20,detailQty+1);updateDetailOp
 function requestCustomDesign(color,size,qty){
  const message=["¡Hola, ONE HIT! Quiero pedir mi diseño personalizado.","Producto: CREA TU 1HIT","Color: "+color,"Talla: "+size,"Cantidad: "+qty,"Quiero coordinar los detalles del estampado y confirmar mi pedido. ¡Gracias!"].join("\n");
  const url="https://wa.me/51960945765?text="+encodeURIComponent(message);
- window.open(url,"_blank","noopener,noreferrer");
+ window.location.href=url;
 }
 $("#detail-add").onclick=(event)=>{
  event.preventDefault();
