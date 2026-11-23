@@ -127,7 +127,7 @@ const catalog=[
  {name:"SAKURA JPN",price:55,colors:["Blanco"],images:["/public/models/sakura-jpn/sakura-jpn-front.png","/public/models/sakura-jpn/sakura-jpn-back.png","/public/models/sakura-jpn/sakura-jpn-onbody.png"],listingImage:"/public/models/sakura-jpn/sakura-jpn-back.png"},
  {name:"BONUM",price:45,colors:["Negro","Blanco"],imagesByColor:{Negro:["/public/models/bonum/black-back.png","/public/models/bonum/black-front.png","/public/models/bonum/black-model.png"],Blanco:["/public/models/bonum/white-back.png","/public/models/bonum/white-front.png","/public/models/bonum/white-model.png"]},listingImage:"/public/models/bonum/black-back.png"},
  {name:"CLASSIC ONE HIT",price:40,colors:["Negro","Blanco"],imagesByColor:{Negro:["/public/models/one-hit/black-back.png","/public/models/one-hit/black-front.png","/public/models/one-hit/black-model.png"],Blanco:["/public/models/one-hit/white-back.png","/public/models/one-hit/white-front.png","/public/models/one-hit/white-model.png"]},listingImage:"/public/models/one-hit/black-back.png"},
- {name:"LIVE YOUR 1HIT",price:49,colors:["Negro","Blanco"]},
+ {name:"I LOVE HATERS",price:55,colors:["Blanco"],imagesByColor:{Blanco:["/public/models/i-love-haters/white-front.png","/public/models/i-love-haters/white-back.png","/public/models/i-love-haters/white-model.png"]},listingImage:"/public/models/i-love-haters/white-front.png"},
  {name:"EVERYDAY 1HIT",price:45,colors:["Blanco","Negro","Gris"]},
  {name:"OWN YOUR WAY",price:49,colors:["Negro","Blanco"]},
  {name:"ONE LIFE",price:49,colors:["Blanco","Negro","Gris"]},
