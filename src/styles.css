@@ -1401,3 +1401,6 @@ body.modal-open{overflow:hidden}
 .shop-card.is-custom .card-add:hover{
  background:#333;
 }
+
+/* I LOVE HATERS: tachado central de LOVE en el nombre del producto */
+.love-strike{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:currentColor;text-decoration-skip-ink:none}
