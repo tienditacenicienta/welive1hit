@@ -143,7 +143,7 @@ const galleryImages=[
 const productImages=(p,color=null)=>p.imagesByColor?.[color||p.colors[0]]||p.images||galleryImages;
 $("#shop-grid").innerHTML=catalog.map((p,i)=>`<article class="shop-card ${p.custom?"is-custom":""}" data-product="${i}">
  <div class="shop-image ${p.custom?"is-custom":""}" role="button" tabindex="0" aria-label="Ver detalles de ${p.name}"><img src="${p.listingImage||(p.images||galleryImages)[0]}" alt="${p.name} — vista principal" loading="lazy"></div>
- <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
+ <div class="shop-info"><div class="shop-name-row"><h3 class="shop-open-detail" role="button" tabindex="0">${p.name==="I LOVE HATERS"?'I <span class="love-strike">LOVE</span> HATERS':p.name}</h3><b>S/ ${p.price.toFixed(2)}</b></div>
  <div class="shop-color-row"><span class="shop-label">COLOR</span><div class="shop-swatches">${p.colors.map((c,n)=>`<button type="button" class="swatch ${n===0?"active":""}" data-color="${c}" aria-label="${c}" title="${c}" style="--swatch:${colorHex[c]}"></button>`).join("")}</div><span class="selected-color">${p.colors[0]}</span></div>
  <div class="shop-controls"><div class="size-picker"><span class="option-label">TALLA</span><div class="size-options card-sizes"><button type="button" data-size="S">S</button><button type="button" data-size="M">M</button><button type="button" data-size="L">L</button><button type="button" data-size="XL">XL</button></div></div><div class="quantity-picker"><span class="option-label">CANTIDAD</span><div class="quantity-control"><button type="button" class="qty-minus" aria-label="Disminuir">−</button><output class="card-quantity">1</output><button type="button" class="qty-plus" aria-label="Aumentar">+</button></div></div></div>
  <button class="card-add" type="button">${p.custom?"PEDIR MI DISEÑO":"AÑADIR A LA BOLSA"}</button></div></article>`).join("");
@@ -172,7 +172,7 @@ function openDetail(index,color=null){
  detailProduct=index;
  const p=catalog[index];
  detailColor=color||p.colors[0];detailSize=null;detailQty=1;
- $("#detail-name").textContent=p.name;
+ $("#detail-name").innerHTML=p.name==="I LOVE HATERS"?'I <span class="love-strike">LOVE</span> HATERS':p.name;
  $("#detail-price").textContent="S/ "+p.price.toFixed(2);
  $("#detail-main-image").parentElement.classList.toggle("is-custom",Boolean(p.custom));
  modal.classList.toggle("custom-product-open",Boolean(p.custom));
