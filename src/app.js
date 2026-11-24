@@ -14,7 +14,7 @@ function show(i){
  current=next;
  $("#model-track").style.transform=`translateX(-${current*20}%)`;
  $("#slide-number").textContent=`${String(current+1).padStart(2,"0")} / 05`;
- $("#product-name").textContent=products[current].name.toUpperCase();
+ $("#product-name").innerHTML=products[current].name==="I LOVE HATERS"?"I <span class=\"love-strike\">LOVE</span> HATERS":products[current].name.toUpperCase();
  $("#product-price").textContent=`S/ ${products[current].price.toFixed(2)}`;
  document.querySelectorAll("#indicators button").forEach((b,n)=>b.classList.toggle("active",n===current));
  restart();
