@@ -1404,3 +1404,32 @@ body.modal-open{overflow:hidden}
 
 /* I LOVE HATERS: tachado central de LOVE en el nombre del producto */
 .love-strike{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:currentColor;text-decoration-skip-ink:none}
+
+/* MOBILE FIX — hero slide 03 scale and complete product image in detail modal */
+@media (max-width:700px){
+  /* Slide 03 has more transparent canvas around the model; enlarge only this slide. */
+  #home .model-slide:nth-child(3) img{
+    height:116% !important;
+    max-width:100vw !important;
+    width:auto !important;
+    object-fit:contain !important;
+    object-position:center bottom !important;
+  }
+
+  /* Keep the full garment visible in the product detail gallery. */
+  .product-modal .detail-main-image{
+    height:34svh !important;
+    min-height:210px !important;
+    max-height:290px !important;
+    overflow:hidden !important;
+  }
+  .product-modal .detail-main-image img{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+    max-height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+  }
+}
